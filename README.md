@@ -41,9 +41,15 @@ button, and corrected navigation/log/settings layouts. Original 22 strategies re
 
 ## Интерфейс / Interface
 
-| RU · обычное окно | ENG · обычное окно |
+| Светлая тема / Light theme | Тёмная тема / Dark theme |
 | :---: | :---: |
-| ![Z-Aura — обзор на русском](assets/screenshots/overview-light.png) | ![Z-Aura — English overview](assets/screenshots/english-overview.png) |
+| ![Z-Aura — обзор в светлой теме](assets/screenshots/overview-light.png) | ![Z-Aura — обзор в тёмной теме](assets/screenshots/overview-dark.png) |
+| **Telegram Proxy · светлая тема** | **Telegram Proxy · тёмная тема** |
+| ![Telegram Proxy — светлая тема](assets/screenshots/telegram-light.png) | ![Telegram Proxy — тёмная тема](assets/screenshots/telegram-dark.png) |
+| **Профили / Profiles** | **Fake-файлы / Fake files** |
+| ![Встроенные стратегии и пользовательские профили](assets/screenshots/profiles-light.png) | ![Fake-файлы в тёмной теме](assets/screenshots/fake-dark.png) |
+| **English UI** | **Мини-оверлей / Mini overlay** |
+| ![Z-Aura — English overview](assets/screenshots/english-overview.png) | ![Мини-оверлей Z-Aura](assets/screenshots/mini-overlay.png) |
 | **Журнал · минимальное окно** | **Настройки · минимальное окно** |
 | ![Журнал с подписью под таблицей](assets/screenshots/journal-minimum.png) | ![Компактные вкладки настроек](assets/screenshots/settings-minimum.png) |
 
