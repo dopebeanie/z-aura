@@ -1,199 +1,235 @@
 <div align="center">
-  <img src="assets/logo.png" alt="Z-Aura" width="96">
+  <img src="Z-Aura-GitHub/assets/logo.png" alt="Z-Aura" width="88">
   <h1>Z-Aura</h1>
   <p><strong>Ваш поток. Ваши правила.<br>Your flow. Your rules.</strong></p>
-  <p>Нативный Windows-интерфейс для zapret · Native Windows UI for zapret</p>
+  <p>Нативный интерфейс для zapret · Windows 10/11 x64 · Один portable EXE</p>
   <p>
-    <img src="https://img.shields.io/badge/Windows-10%20%2F%2011%20x64-7C3AED?style=for-the-badge" alt="Windows 10/11 x64">
-    <img src="https://img.shields.io/badge/.NET%2010-WPF-8B5CF6?style=for-the-badge" alt=".NET 10 / WPF">
-    <img src="https://img.shields.io/badge/Portable-Single%20EXE-A78BFA?style=for-the-badge" alt="Portable single EXE">
+    <img src="https://img.shields.io/badge/version-0.3.0-7C3AED?style=flat-square" alt="Version 0.3.0">
+    <img src="https://img.shields.io/badge/.NET_10-WPF-8B5CF6?style=flat-square" alt=".NET 10 / WPF">
+    <img src="https://img.shields.io/badge/Interface-RU_%2F_ENG-A78BFA?style=flat-square" alt="RU / ENG">
   </p>
   <p>
-    <a href="#ru">Русский</a> ·
-    <a href="#en">English</a> ·
-    <a href="#screenshots">Скриншоты / Screenshots</a> ·
-    <a href="https://dopebeanie.github.io/Z-Aura/">Сайт / Website</a> ·
+    <a href="#ru">Русский</a> · <a href="#en">English</a> ·
+    <a href="https://github.com/dopebeanie/Z-Aura/releases">Скачать / Releases</a> ·
     <a href="https://t.me/zaurafork">Telegram · @zaurafork</a>
-  </p>
-  <p>
-    <a href="https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe"><strong>↓ Скачать / Download Z-Aura.exe</strong></a>
-    &nbsp; · &nbsp;
-    <a href="https://github.com/dopebeanie/Z-Aura/releases">Все релизы / All releases</a>
   </p>
 </div>
 
----
+> **Не VPN.** Z-Aura не скрывает IP, не добавляет VPN-шифрование и не гарантирует анонимность или доступность сайтов.
+> **Not a VPN.** Z-Aura does not hide your IP, add VPN encryption or guarantee anonymity or connectivity.
 
-## Новое в Z-Aura / What's new
+## Новое в Z-Aura 0.3.0 / What's new
 
-**Telegram теперь внутри. Больше контроля — без лишних установок.**
+**Comfort Update + актуальные исправления интерфейса и Discord Return.**
 
-- **Встроенный Telegram Proxy** на базе Flowseal: работает независимо от zapret;
-  ON/OFF, перезапуск, порт, время работы и журнал в отдельной стеклянной карточке.
-- **Конфиг прямо в GUI:** редактирование параметров с проверкой ошибок,
-  подключение Telegram Desktop через MTProto-ссылку.
-- **Один portable EXE:** Python и зависимости включены; runtime не скачивается при запуске.
-- **Обновлённая Discord Presence:** `Alt + Zapret On/Off + Proxy On/Off`, таймер на всё
-  время работы приложения и автоматическое переподключение. Discord-настройки из Z-Aura удалены.
-- **Мы в Telegram:** [@zaurafork](https://t.me/zaurafork) — новости, changelog и анонсы.
-  Ссылка доступна в приложении и Presence; необязательная кнопка «Мой Alt» сохранена.
+- **RU / ENG:** язык сохраняется; первый запуск на русском. Пропускаемое обучение и встроенная инструкция.
+- **Работа в фоне:** восстановление окна из трея; добровольный мини-оверлей с перетаскиванием и привязкой к краям экрана.
+- **Discord внизу меню:** кнопка входа над Telegram-каналом, круглый аватар, имя и `@username` после авторизации. Длинные имена сокращаются, а не переводятся.
+- **Страница возврата:** после ответа Discord — локальная страница в стиле Z-Aura и кнопка **«Вернуться в приложение»**. Она восстанавливает уже запущенное окно, без нового процесса или регистрации протокола Windows.
+- **Аккуратная компоновка:** исправлены обрезанные края кнопок меню, подпись под таблицей журнала и размеры вкладок «Общие» / «Внешний вид». Навигация прокручивается отдельно от нижних кнопок.
+- **YouTube Focus:** обратимая экспериментальная копия профиля с узкими YouTube/CDN-блоками. Исходные 22 стратегии и runtime Flowseal 1.10.4 не заменяются.
+- **Остановка zapret:** отдельный помощник проверяет PID, время создания процесса и отсутствие посторонних участников консоли. Telegram Proxy управляется независимо.
 
-**English:** bundled independent Telegram Proxy with ON/OFF, restart, uptime/logs and
-a validated GUI config editor; embedded Python with no runtime downloads; Presence
-shows Alt, Zapret and Proxy with a stable session timer and automatic reconnect.
-Discord settings are removed. Follow [@zaurafork](https://t.me/zaurafork) for updates.
+**English:** persistent RU/ENG, skippable tutorial, tray restore and optional mini overlay;
+Discord profile in the lower sidebar, an offline local return page with a **Return to the app**
+button, and corrected navigation/log/settings layouts. Original 22 strategies remain intact.
 
-> Это тестовый кандидат обновления, не объявление уже опубликованного релиза.
-> `Proxy: On` означает готовый локальный слушатель, не гарантирует доступность Telegram.
-> Live Telegram/Discord и чистая Windows ещё требуют проверки.<br>
-> This update is a test candidate, not a claim that a release is already published.
-> Proxy On confirms a local listener, not Telegram connectivity. Live/clean-Windows checks remain pending.
+> **Статус: кандидат обновления / test candidate.** README описывает текущую локальную сборку,
+> а не подтверждает её публикацию на GitHub. Живой OAuth, реальное видео, elevated driver/service
+> и чистая Windows ещё требуют проверки. `Proxy: On` означает готовый локальный слушатель,
+> не гарантированное подключение к Telegram.
 
----
-
-<a id="screenshots"></a>
 ## Интерфейс / Interface
 
-| Светлая тема / Light theme | Тёмная тема / Dark theme |
+| RU · обычное окно | ENG · обычное окно |
 | :---: | :---: |
-| ![Z-Aura — обзор, светлая тема](assets/screenshots/overview-light.png) | ![Z-Aura — overview, dark theme](assets/screenshots/overview-dark.png) |
-| **Профили / Profiles** | **Fake-файлы / Fake payloads** |
-| ![Z-Aura — профили и встроенные стратегии](assets/screenshots/profiles-light.png) | ![Z-Aura — fake payload library](assets/screenshots/fake-dark.png) |
-| **Telegram Proxy · Light** | **Telegram Proxy · Dark** |
-| ![Z-Aura — Telegram Proxy, светлая тема](assets/screenshots/telegram-light.png) | ![Z-Aura — Telegram Proxy, dark theme](assets/screenshots/telegram-dark.png) |
+| ![Z-Aura — обзор на русском](Z-Aura-GitHub/assets/screenshots/overview-light.png) | ![Z-Aura — English overview](Z-Aura-GitHub/assets/screenshots/english-overview.png) |
+| **Журнал · минимальное окно** | **Настройки · минимальное окно** |
+| ![Журнал с подписью под таблицей](Z-Aura-GitHub/assets/screenshots/journal-minimum.png) | ![Компактные вкладки настроек](Z-Aura-GitHub/assets/screenshots/settings-minimum.png) |
 
-<sub>Снимки настоящего WPF-интерфейса из UI-проверки; состояние и данные демонстрационные. Интерфейс приложения сейчас на русском.<br>Captures of the real WPF interface from UI tests; state and data are illustrative. The application UI is currently in Russian.</sub>
-
----
+<sub>Снимки настоящего WPF-интерфейса из автоматических проверок. Данные и состояния тестовые;
+скриншоты не подтверждают живое подключение к Discord, Telegram или обход DPI.</sub>
 
 <a id="ru"></a>
 ## Русский
 
-**Z-Aura** — Windows-приложение для управления zapret на базе **Flowseal/zapret-discord-youtube 1.10.4**. Выбирайте стратегии, редактируйте списки и создавайте собственные профили через интерфейс — без ручного запуска bat-файлов.
+**Z-Aura** — независимый Windows-интерфейс для управления zapret на базе
+[Flowseal/zapret-discord-youtube 1.10.4](https://github.com/Flowseal/zapret-discord-youtube).
+Выбирайте стратегии, редактируйте списки и создавайте профили без ручного запуска bat-файлов.
 
 ### Возможности
 
-| | Что доступно |
+| Раздел | Что доступно |
 | :--- | :--- |
-| **22 стратегии** | Встроенные режимы Flowseal и быстрое переключение выбранного профиля. |
-| **Свои профили** | Создание, копирование, импорт и экспорт JSON; параметры и ресурсы для блоков стратегии. |
-| **Списки** | Домены, IP и исключения: поиск, редактирование, импорт, экспорт и удаление дублей. |
-| **Fake-библиотека** | Встроенные и пользовательские payload-файлы, просмотр метаданных и SHA-256. |
-| **Game Filter** | Четыре режима фильтрации игрового трафика и пользовательские диапазоны портов. |
-| **Диагностика** | Журнал движка и HTTPS-проверки, запускаемые пользователем. |
-| **Работа в фоне** | Трей и управление службой Windows из приложения; служба может работать без открытого GUI. |
-| **Интерфейс** | Светлая/тёмная тема, стеклянное оформление, Ctrl+K, уменьшение движения и прозрачности, высокий контраст. |
-| **Telegram Proxy** | Независимые ON/OFF, конфиг, перезапуск, порт, uptime и журнал; MTProto → WebSocket. |
-| **Discord Rich Presence** | Alt, Zapret On/Off, Proxy On/Off, время сеанса и кнопка нашего Telegram-канала. |
+| Профили | 22 встроенные стратегии; копирование, редактирование, импорт/экспорт JSON, привязка ресурсов к блокам. |
+| Списки и fake-файлы | Домены, IP и исключения; поиск, проверка, импорт/экспорт и удаление дублей; библиотека payload-файлов с SHA-256. |
+| Game Filter | Четыре режима и пользовательские диапазоны портов. |
+| Диагностика | Журнал и HTTPS-проверки по запросу пользователя; не тест QUIC или скорости видео. |
+| Помощь с подключением | DNS/TLS → предпросмотр hosts → добровольное применение с копией и откатом только блока Z-Aura. |
+| Telegram Proxy | Независимые ON/OFF, перезапуск, конфиг, порт, uptime и журнал; MTProto → WebSocket на базе Flowseal. |
+| Discord Presence | Alt + Zapret On/Off + Proxy On/Off, время работы приложения, канал и необязательная кнопка «Мой Alt». |
+| Discord-профиль | Добровольный browser OAuth с PKCE и `identify`; аватар и имя в нижнем меню, локальная страница возврата. |
+| Интерфейс | RU/ENG, светлая/тёмная тема, Ctrl+K, инструкция, обучение, трей и мини-оверлей; уменьшение движения/прозрачности и высокий контраст. |
+| Служба Windows | Управление отдельной постоянной копией; служба может продолжать работу без GUI. |
 
-### Скачать и запустить
+### Скачать и начать
 
-1. Скачайте **[Z-Aura.exe](https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe)** из последнего опубликованного релиза.
-2. Поместите файл в папку, где разрешена запись. Установщик и отдельно установленный .NET не нужны: runtime и ресурсы встроены.
-3. Запустите приложение. Для работы движка и службы нужны права администратора; текущая production-сборка запрашивает их при запуске.
-4. Выберите стратегию и нажмите **«Запустить профиль»**.
-5. Если доступа нет, попробуйте другой профиль и проверьте журнал/диагностику — универсальная стратегия для всех провайдеров не гарантируется.
-6. Для Telegram включите **Telegram Proxy** отдельно и нажмите **«Подключить Telegram»**.
-   Прокси слушает только локальный адрес; изменения конфигурации применяются после его перезапуска.
+1. Откройте [GitHub Releases](https://github.com/dopebeanie/Z-Aura/releases) и скачайте EXE нужной версии. Проверьте SHA-256, указанный именно для этого файла.
+2. Поместите EXE в папку с разрешённой записью. Установщик и отдельные .NET/Python не нужны — зависимости встроены.
+3. Запустите Z-Aura. Production-сборка запрашивает права администратора при запуске: они нужны для движка/службы.
+4. Выберите стратегию и нажмите **«Запустить профиль»**. Если доступа нет, попробуйте другой ALT и посмотрите журнал.
+5. Для Telegram отдельно включите **Telegram Proxy** и нажмите **«Подключить Telegram»**. Изменения его конфигурации применяются после перезапуска прокси.
 
-**Платформа:** Windows 10/11 x64. Отдельные Python, .NET, WebView2, NSSM и Discord SDK не требуются. Для Presence нужен запущенный desktop-клиент Discord; для Telegram и диагностики — сеть.
+Закрытие в трей не равно завершению приложения. Остановка zapret не выключает Telegram Proxy;
+для полного выхода используйте команду выхода из приложения. Установленная служба имеет отдельный жизненный цикл.
+Не отключайте антивирус, Secure Boot или проверку подписи драйверов ради запуска.
 
-**Следить за обновлениями:** [Telegram · @zaurafork](https://t.me/zaurafork).
+### Вход через Discord
 
-> Если ссылка скачивания возвращает 404, релиз ещё не опубликован либо к нему не прикреплён файл с точным именем `Z-Aura.exe`. Откройте [список релизов](https://github.com/dopebeanie/Z-Aura/releases).
+- **Вход доступен обычным пользователям, не только автору Z-Aura.** Каждый подтверждает доступ к своему публичному профилю в браузере; доступа к Developer Portal ему не нужно.
+- Кнопка находится внизу левой панели, **над Telegram-каналом**. После входа здесь показываются аватар, имя и `@username`; нажатие открывает выход из профиля.
+- Z-Aura запрашивает только **`identify`**, без email, серверов, друзей и сообщений. Пароль, bot token и Client Secret в приложение не вводятся.
+- После ответа Discord локальная страница предлагает вернуться в Z-Aura. Кнопка доступна 90 секунд; если окно не появилось, откройте его через значок в трее. Результат входа показывается в приложении, не объявляется страницей автоматически.
+- `127.0.0.1` ведёт на компьютер самого пользователя. Страница, логотип и шрифт встроены в EXE; хостинг, аналитика и внешние ресурсы страницы не нужны.
+- Токен, профиль и аватар остаются в памяти, не сохраняются на диск и очищаются при выходе/истечении сеанса. После завершения Z-Aura нужен новый вход. Аватар загружается с Discord CDN без bearer-токена и дискового кэша; при ошибке остаётся локальная иконка.
 
-### Портативное хранение
+<details>
+<summary><strong>Владельцу приложения: Redirect URI и ошибка «некорректный redirect_uri»</strong></summary>
 
-По умолчанию настройки, журналы и кэш находятся в `%APPDATA%\Z-Aura`. Чтобы хранить их рядом с EXE, **до запуска** создайте пустой файл `portable.flag`:
+В [Developer Portal](https://discord.com/developers/applications/1573957957576556685/oauth2)
+для приложения **1573957957576556685** откройте **OAuth2 → Redirects**, добавьте и сохраните:
 
 ```text
-Z-Aura/
-├── Z-Aura.exe
-├── portable.flag
-└── data/              ← создаётся приложением
+http://127.0.0.1:43827/oauth/callback
 ```
 
-Смена режима не переносит прежние данные автоматически. Установленная служба использует отдельную постоянную копию в `%ProgramData%\Z-Aura\Service`; закрытие GUI не обязательно останавливает службу.
+Точный `http`, IP, порт и путь, **без `/` в конце**. Это не поле Interactions Endpoint
+и не адрес Terms/Privacy. После сохранения отмените старую попытку и начните вход заново.
+Один зарегистрированный URI подходит всем пользователям: listener работает у каждого локально.
+S256 PKCE позволяет обмен кода без Client Secret; refresh token Z-Aura не сохраняет и не обновляет.
+Public Bot не относится к этому входу. Живой вход вторым аккаунтом ещё не проверен.
 
-### Важно знать
+</details>
 
-- **Это не VPN.** Z-Aura не скрывает IP, не добавляет шифрование и не гарантирует анонимность. Используйте приложение только там, где это законно и разрешено правилами вашей сети.
-- **Presence работает всегда, пока открыт Z-Aura**, включая сворачивание в трей. Отдельного переключателя нет. Имя выбранного профиля может попасть в активность Discord — не включайте в него личные сведения. Видимость регулируется настройками активности Discord.
-- Профили и журналы не отправляются разработчику автоматически. Presence передаётся клиенту Discord через локальный IPC; пользовательская диагностика обращается к проверяемым сайтам.
-- Telegram Proxy подключается к Telegram endpoint-ам; CF-relay включается только по выбору пользователя.
-  Secret хранится в локальных настройках, скрывается в журнале и не передаётся в Presence.
-- SHA-256 проверяет целостность, но не заменяет подпись издателя. Сверяйте хэш конкретного файла с данными его релиза. Не отключайте антивирус, Secure Boot или проверку подписи драйверов.
-- Текущая сборка — кандидат на выпуск. Проверки на чистой Windows, службы/драйвера и перезагрузки, подпись издателя и требования распространения сторонних компонентов ещё требуют отдельной проверки перед общедоступным выпуском.
+### Данные, Presence и ограничения
 
-### Авторы и лицензии
-
-Z-Aura — независимый GUI-проект; он не является официальным продуктом Discord, Flowseal или авторов zapret. Оригинальный код Z-Aura имеет лицензию MIT; это **не перелицензирует** zapret, WinDivert, Cygwin, .NET, шрифты или стратегии Flowseal. При публикации составного EXE необходимо соблюдать их лицензии, уведомления и применимые требования о предоставлении исходного кода.
-
-**Основа:** [Flowseal/zapret-discord-youtube](https://github.com/Flowseal/zapret-discord-youtube) · [Flowseal/tg-ws-proxy](https://github.com/Flowseal/tg-ws-proxy) · [bol-van/zapret](https://github.com/bol-van/zapret) · [WinDivert](https://reqrypt.org/windivert.html) · [Inter](https://rsms.me/inter/).
-
----
+- По умолчанию данные находятся в **`%APPDATA%\Z-Aura`**. Для хранения рядом с EXE создайте пустой **`portable.flag` до запуска** — приложение использует соседнюю папку `data`. Смена режима не переносит данные автоматически.
+- Перед обновлением закройте GUI и сохраните прежние `portable.flag` / `data`. Не удаляйте пользовательские данные вместе со старым EXE. Служба использует `%ProgramData%\Z-Aura\Service`.
+- **Presence всегда работает, пока запущена Z-Aura, независимо от входа.** Для отображения нужен desktop-клиент Discord; видимость регулируется его настройками активности. Имя профиля ALT может быть опубликовано — не включайте в него личные сведения.
+- Необязательные RPC-счётчики — запуски GUI-zapret/Proxy и HTTPS-проверки за текущий сеанс, не трафик, скорость или успешность обхода. Их можно скрыть, не отключая Presence. Имя Discord-аккаунта в RPC не отправляется.
+- Нет автоматической отправки журналов/профилей разработчику. Это не означает отсутствие сети: Presence обращается к Discord IPC, OAuth/CDN — к Discord, прокси — к Telegram/выбранным relay, диагностика — к проверяемым сайтам.
+- Secret Telegram Proxy хранится в локальных настройках, скрывается в логах и не попадает в Presence. CF-relay применяется по конфигурации пользователя; обновление списка доменов с GitHub отключено.
+- YouTube Focus экспериментален, не переключает уже работающий движок автоматически и не гарантирует доступность видео. Hosts-мастер не обязателен, не обходит защиту Windows; его резервные копии могут содержать частные адреса.
+- SHA-256 проверяет целостность, **не является цифровой подписью**. Подпись издателя, требования распространения сторонних компонентов и live/system acceptance требуют отдельной проверки перед общедоступным выпуском.
 
 <a id="en"></a>
 ## English
 
-**Z-Aura** is a Windows desktop interface for zapret, based on **Flowseal/zapret-discord-youtube 1.10.4**. Choose strategies, edit lists and create custom profiles without manually running batch scripts. The README is bilingual; the desktop UI is currently Russian.
+**Z-Aura** is an independent native Windows GUI for zapret, based on Flowseal 1.10.4 and
+its 22 strategies. It includes custom profiles, domain/IP/exclusion editors, a fake-payload
+library, Game Filter, on-demand diagnostics and an opt-in DNS/hosts wizard.
 
-### Features
+**Telegram Proxy** is bundled and independently controlled. **Discord Presence** shows
+Alt + Zapret On/Off + Proxy On/Off with an application-lifetime timer and reconnects;
+it stays active without profile authorization. Optional counters describe session starts/checks,
+not bandwidth or bypass success.
 
-| | What you get |
-| :--- | :--- |
-| **22 strategies** | Built-in Flowseal modes and quick selected-profile switching. |
-| **Custom profiles** | Create, duplicate, import and export JSON; configure arguments and per-block resource bindings. |
-| **List editor** | Domains, IP addresses and exclusions: search, edit, import, export and deduplicate. |
-| **Fake library** | Built-in and custom payload files with metadata and SHA-256 inspection. |
-| **Game Filter** | Four game-traffic modes and custom port ranges. |
-| **Diagnostics** | Engine logs and user-triggered HTTPS availability checks. |
-| **Background operation** | System tray and Windows service management; the service can run without the GUI. |
-| **Appearance** | Light/dark glass themes, Ctrl+K actions, reduced motion/transparency and high contrast. |
-| **Telegram Proxy** | Independent ON/OFF, configuration, restart, port, uptime and logs; MTProto → WebSocket. |
-| **Discord Rich Presence** | Alt, Zapret On/Off, Proxy On/Off, elapsed time and our Telegram channel button. |
+### Getting started
 
-### Download and run
+1. Download your selected build from [Releases](https://github.com/dopebeanie/Z-Aura/releases) and verify its exact SHA-256.
+2. Put the EXE in a writable folder. No installer, separately installed .NET/Python, WebView2 or NSSM is required.
+3. Launch it and accept the production build's administrator prompt if you trust the source.
+4. Select a strategy and click **Start profile**; try another ALT and check logs if needed.
+5. Enable **Telegram Proxy** separately and use **Connect Telegram**. Configuration edits require a proxy restart.
 
-1. Download **[Z-Aura.exe](https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe)** from the latest published release.
-2. Place it in a writable folder. No installer or separately installed .NET runtime is needed: runtime and resources are embedded.
-3. Launch the app. Engine/service operations require administrator rights; the current production build requests elevation at startup.
-4. Select a strategy and click **«Запустить профиль»** (Run profile).
-5. If a site remains unavailable, try another profile and check logs/diagnostics. No single strategy is guaranteed to work for every ISP.
-6. For Telegram, enable **Telegram Proxy** separately and click **«Подключить Telegram»**.
-   Only loopback bind addresses are accepted; configuration edits require a proxy restart.
+Choose ENG in Welcome or Settings. The language is saved; first launch defaults to Russian.
+Tray operation, a skippable tutorial, an optional draggable/snapping overlay and accessibility
+modes are available. Stopping zapret does not stop Telegram Proxy; installed services have
+their own lifecycle. Never disable Windows security protections to run the app.
 
-**Platform:** Windows 10/11 x64. No separately installed Python, .NET, WebView2, NSSM or Discord SDK is required. Presence needs desktop Discord; Telegram and diagnostics need network access.
+### Discord sign-in and return
 
-**Follow updates:** [Telegram · @zaurafork](https://t.me/zaurafork).
+Ordinary users can authorize their own account using browser OAuth/S256 PKCE and `identify`
+only; there is no owner allowlist and no password/Client Secret in the EXE. The app owner must
+register **`http://127.0.0.1:43827/oauth/callback`** once in Developer Portal. Users need only
+a running local Z-Aura and access to Discord, not Developer Portal permissions.
 
-> A 404 download usually means there is no published release yet, or its asset is not named exactly `Z-Aura.exe`. Check [all releases](https://github.com/dopebeanie/Z-Aura/releases).
+The sign-in button sits above the Telegram channel in the lower sidebar. After authorization
+it shows a round avatar, display name and `@username`. The bundled RU/ENG return page offers
+**Return to the app**, restoring the existing GUI without a new process or Windows URL protocol.
+The button lasts 90 seconds; use the tray icon if focus is denied or the listener has expired.
+Sign-in success/failure stays in the GUI. Live OAuth with another account remains unverified.
 
-### Portable storage
+Tokens/profile/avatar stay in memory only; no refresh token is retained. CDN avatar fetches
+use no bearer header or disk cache. Account identity is not sent to Rich Presence.
+The local page has no scripts, analytics, external assets or hosting requirement.
 
-By default, settings, logs and cache live in `%APPDATA%\Z-Aura`. Create an empty `portable.flag` next to the EXE **before launch** to use the adjacent `data` folder instead. Changing modes does not migrate old data automatically. The installed service uses a separate persistent copy in `%ProgramData%\Z-Aura\Service`; closing the GUI does not necessarily stop it.
+### Storage and privacy
 
-### Before you use it
+Default storage: `%APPDATA%\Z-Aura`. An empty adjacent `portable.flag` selects `./data`;
+switching modes does not migrate data. Preserve your settings/data when replacing an EXE.
+The service uses a persistent copy under `%ProgramData%\Z-Aura\Service`.
 
-- **Not a VPN:** Z-Aura does not hide your IP, add encryption or guarantee anonymity. Follow applicable laws and your network's rules.
-- **Presence is always active while the GUI runs**, including when minimized to the tray. There is no in-app toggle. Selected profile names may be shared as Discord activity; avoid sensitive information. Discord's own activity settings control visibility.
-- Local profiles/logs are not automatically uploaded to the developer. Presence uses local Discord IPC; user-triggered diagnostics contact the tested websites.
-- Telegram Proxy connects to Telegram endpoints; third-party CF relays are opt-in.
-  The secret stays in local settings, is redacted from logs and is never included in Presence.
-- SHA-256 checks integrity, not publisher identity. Compare your exact file with the hash supplied in its release. Do not disable antivirus, Secure Boot or driver-signature enforcement.
-- The current build is a release candidate. Clean-Windows, live service/driver/reboot validation, publisher signing and third-party redistribution requirements still need separate review before a public release.
+Profiles/logs are not automatically uploaded to the developer, but Discord, proxy and
+user-triggered diagnostic operations still make their required connections. Avoid sensitive
+ALT profile names in Presence; redact secrets/private addresses from logs and hosts backups.
+YouTube Focus and hosts samples are experimental, not universal connectivity fixes.
+Publisher signing, redistribution/source obligations and clean-Windows/live driver/service
+acceptance still need review.
 
-### Credits and licensing
+## Разработчикам / Development
 
-Z-Aura is an independent GUI project, not an official Discord, Flowseal or zapret product. Original Z-Aura code is MIT-licensed; this **does not relicense** zapret, WinDivert, Cygwin, .NET, fonts or Flowseal strategies. Distributing the combined EXE requires compliance with their licenses, notices and applicable corresponding-source obligations.
+Current desktop: **.NET 10 / WPF + native C bootstrap (LLVM-MinGW)**. React/Tauri in
+`src` / `src-tauri` is a separate prototype, not the shipping EXE.
 
-**Built on:** [Flowseal/zapret-discord-youtube](https://github.com/Flowseal/zapret-discord-youtube) · [Flowseal/tg-ws-proxy](https://github.com/Flowseal/tg-ws-proxy) · [bol-van/zapret](https://github.com/bol-van/zapret) · [WinDivert](https://reqrypt.org/windivert.html) · [Inter](https://rsms.me/inter/).
+Build requirements: Windows x64, .NET SDK 10.0.x with WindowsDesktop, Node 24+ and
+`tools/llvm-mingw-20261117-msvcrt-x86_64`. Pinned local inputs are in `upstream` and
+`desktop/Z-Aura/assets`; retain them and dependency caches for offline builds.
 
----
+```powershell
+# After initial dependency restore/setup; do not overwrite a running EXE.
+node scripts/build-portable.mjs --output-dir artifacts/portable-discord-return
+node scripts/verify-portable.mjs --artifact-dir artifacts/portable-discord-return
+node --test tests/*.test.mjs
+dotnet run --project scripts/localization-audit -- "$PWD"
+```
 
-<div align="center">
-  <p><strong>Август / @dopebeanie (wannadie2day)</strong></p>
-  <p><a href="https://t.me/zaurafork"><strong>Telegram-канал Z-Aura · @zaurafork</strong></a></p>
-  <p><a href="mailto:z-aura@internet.ru">z-aura@internet.ru</a> · <a href="https://github.com/dopebeanie/Z-Aura/issues">Issues</a> · <a href="https://dopebeanie.github.io/cl3j1hdh7dbb2dzx/terms.html">Условия / Terms</a> · <a href="https://dopebeanie.github.io/cl3j1hdh7dbb2dzx/privacy.html">Конфиденциальность / Privacy</a></p>
-  <p><sub>При обращении приложите версию, выбранный профиль и текст ошибки. Удалите секреты и личные данные из журналов.<br>When reporting an issue, include the version, selected profile and error. Remove secrets and personal data from logs.</sub></p>
-</div>
+**Current local candidate:** `artifacts/portable-discord-return/Z-Aura.exe` · **0.3.0.0** ·
+**96 256 000 bytes / 91.80 MiB**.
+
+```text
+SHA-256 e29b5513bff0c8e6a652573d5588711d6b57f378179182140b882b6159218e5e
+```
+
+Latest checks: **1,586 backend assertions**, **248 GUI PASS records** (RU/ENG, normal/minimum
+sizes, isolated HTTP return restoring a hidden/minimized WPF window), **56 Node tests** (including documentation) and
+**609 localization fragments**. The self-contained unprivileged test payload also passed
+1,586 assertions with an invalid `DOTNET_ROOT`. These fixtures do **not** establish live
+OAuth/Telegram, real ISP/video, elevated winws/hosts/service/reboot or clean-Windows acceptance.
+Tests are recorded for this candidate, not automatically for later rebuilds.
+
+- [Current verification](docs/DESKTOP-VERIFICATION.md)
+- [Comfort Update, Discord return/security and owner setup](docs/COMFORT-UPDATE.md)
+- [Desktop architecture and build](docs/DESKTOP-PORTABLE.md)
+- [Telegram Proxy](docs/TELEGRAM-PROXY.md) · [Discord Presence](docs/DISCORD-PRESENCE.md)
+- [DNS/hosts wizard](docs/HOSTS-REPAIR.md)
+- [Telegram announcement draft](docs/TELEGRAM-POST-0.3.md)
+
+## Авторы и лицензии / Credits and licensing
+
+**@dopebeanie / TC Studio** · [Telegram](https://t.me/zaurafork) ·
+[Issues](https://github.com/dopebeanie/Z-Aura/issues) · [z-aura@internet.ru](mailto:z-aura@internet.ru)
+
+Independent project; not an official Discord, Flowseal or zapret product.
+Original Z-Aura code is [MIT](LICENSE); this does not relicense bundled third-party components.
+Keep their licenses/notices and comply with applicable corresponding-source obligations:
+[NOTICE.md](NOTICE.md).
+
+[Flowseal zapret](https://github.com/Flowseal/zapret-discord-youtube) ·
+[Flowseal tg-ws-proxy](https://github.com/Flowseal/tg-ws-proxy) ·
+[bol-van/zapret](https://github.com/bol-van/zapret) ·
+[WinDivert](https://reqrypt.org/windivert.html) · [Inter](https://rsms.me/inter/)
+
+[Terms](https://dopebeanie.github.io/cl3j1hdh7dbb2dzx/terms.html) ·
+[Privacy](https://dopebeanie.github.io/cl3j1hdh7dbb2dzx/privacy.html)
+— legal pages require updated OAuth/statistics disclosure review before distributing this candidate.
