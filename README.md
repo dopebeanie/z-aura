@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="Z-Aura-GitHub/assets/logo.png" alt="Z-Aura" width="88">
+  <img src="assets/logo.png" alt="Z-Aura" width="88">
   <h1>Z-Aura</h1>
   <p><strong>Ваш поток. Ваши правила.<br>Your flow. Your rules.</strong></p>
   <p>Нативный интерфейс для zapret · Windows 10/11 x64 · Один portable EXE</p>
@@ -43,9 +43,9 @@ button, and corrected navigation/log/settings layouts. Original 22 strategies re
 
 | RU · обычное окно | ENG · обычное окно |
 | :---: | :---: |
-| ![Z-Aura — обзор на русском](Z-Aura-GitHub/assets/screenshots/overview-light.png) | ![Z-Aura — English overview](Z-Aura-GitHub/assets/screenshots/english-overview.png) |
+| ![Z-Aura — обзор на русском](assets/screenshots/overview-light.png) | ![Z-Aura — English overview](assets/screenshots/english-overview.png) |
 | **Журнал · минимальное окно** | **Настройки · минимальное окно** |
-| ![Журнал с подписью под таблицей](Z-Aura-GitHub/assets/screenshots/journal-minimum.png) | ![Компактные вкладки настроек](Z-Aura-GitHub/assets/screenshots/settings-minimum.png) |
+| ![Журнал с подписью под таблицей](assets/screenshots/journal-minimum.png) | ![Компактные вкладки настроек](assets/screenshots/settings-minimum.png) |
 
 <sub>Снимки настоящего WPF-интерфейса из автоматических проверок. Данные и состояния тестовые;
 скриншоты не подтверждают живое подключение к Discord, Telegram или обход DPI.</sub>
@@ -208,12 +208,12 @@ sizes, isolated HTTP return restoring a hidden/minimized WPF window), **56 Node 
 OAuth/Telegram, real ISP/video, elevated winws/hosts/service/reboot or clean-Windows acceptance.
 Tests are recorded for this candidate, not automatically for later rebuilds.
 
-- [Current verification](docs/DESKTOP-VERIFICATION.md)
-- [Comfort Update, Discord return/security and owner setup](docs/COMFORT-UPDATE.md)
-- [Desktop architecture and build](docs/DESKTOP-PORTABLE.md)
-- [Telegram Proxy](docs/TELEGRAM-PROXY.md) · [Discord Presence](docs/DISCORD-PRESENCE.md)
-- [DNS/hosts wizard](docs/HOSTS-REPAIR.md)
-- [Telegram announcement draft](docs/TELEGRAM-POST-0.3.md)
+- [Current verification](https://github.com/dopebeanie/Z-Aura/blob/HEAD/docs/DESKTOP-VERIFICATION.md)
+- [Comfort Update, Discord return/security and owner setup](https://github.com/dopebeanie/Z-Aura/blob/HEAD/docs/COMFORT-UPDATE.md)
+- [Desktop architecture and build](https://github.com/dopebeanie/Z-Aura/blob/HEAD/docs/DESKTOP-PORTABLE.md)
+- [Telegram Proxy](https://github.com/dopebeanie/Z-Aura/blob/HEAD/docs/TELEGRAM-PROXY.md) · [Discord Presence](https://github.com/dopebeanie/Z-Aura/blob/HEAD/docs/DISCORD-PRESENCE.md)
+- [DNS/hosts wizard](https://github.com/dopebeanie/Z-Aura/blob/HEAD/docs/HOSTS-REPAIR.md)
+- [Telegram announcement · plain text](https://github.com/dopebeanie/Z-Aura/blob/HEAD/docs/TELEGRAM-POST-0.3.txt)
 
 ## Авторы и лицензии / Credits and licensing
 
@@ -221,9 +221,9 @@ Tests are recorded for this candidate, not automatically for later rebuilds.
 [Issues](https://github.com/dopebeanie/Z-Aura/issues) · [z-aura@internet.ru](mailto:z-aura@internet.ru)
 
 Independent project; not an official Discord, Flowseal or zapret product.
-Original Z-Aura code is [MIT](LICENSE); this does not relicense bundled third-party components.
+Original Z-Aura code is [MIT](https://github.com/dopebeanie/Z-Aura/blob/HEAD/LICENSE); this does not relicense bundled third-party components.
 Keep their licenses/notices and comply with applicable corresponding-source obligations:
-[NOTICE.md](NOTICE.md).
+[NOTICE.md](https://github.com/dopebeanie/Z-Aura/blob/HEAD/NOTICE.md).
 
 [Flowseal zapret](https://github.com/Flowseal/zapret-discord-youtube) ·
 [Flowseal tg-ws-proxy](https://github.com/Flowseal/tg-ws-proxy) ·
