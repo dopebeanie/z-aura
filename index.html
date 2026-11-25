@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Z-Aura — нативный интерфейс для zapret</title>
 <meta name="description" content="Z-Aura — Windows-интерфейс для zapret-discord-youtube. Стратегии обхода DPI, профили, редактор списков и fake-файлы без bat-файлов.">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="apple-touch-icon" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -24,13 +26,15 @@
   --stroke:rgba(255,255,255,.45);
   --shadow:0 8px 32px rgba(124,58,237,.10);
   --shadow-lg:0 24px 64px rgba(124,58,237,.16);
+  --scroll-thumb:rgba(124,58,237,.35);
+  --scroll-hover:rgba(124,58,237,.6);
   --spring:cubic-bezier(.34,1.56,.64,1);
   --ease:cubic-bezier(.22,1,.36,1);
   --radius:24px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 ::selection{background:var(--accent-glow);color:var(--accent-deep)}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--scroll-thumb) transparent}
 body{
   font-family:'Manrope','Inter',-apple-system,'Segoe UI',sans-serif;
   color:var(--text);
@@ -39,10 +43,13 @@ body{
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
 }
-::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar{width:10px;height:10px}
 ::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:rgba(124,58,237,.22);border-radius:4px;transition:background .3s}
-::-webkit-scrollbar-thumb:hover{background:rgba(124,58,237,.45)}
+::-webkit-scrollbar-thumb{background:var(--scroll-thumb);border:2px solid transparent;background-clip:padding-box;border-radius:999px}
+::-webkit-scrollbar-thumb:hover{background-color:var(--scroll-hover)}
+::-webkit-scrollbar-corner{background:transparent}
+::-webkit-scrollbar-button{display:none;width:0;height:0}
+@supports selector(::-webkit-scrollbar){html{scrollbar-width:auto;scrollbar-color:auto}}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px;box-shadow:0 0 0 6px var(--accent-glow)}
 
 /* ---------- Фон: анимированные блобы ---------- */
@@ -98,19 +105,22 @@ h2{font-size:clamp(30px,4vw,44px);font-weight:800;letter-spacing:-.02em;line-hei
 
 /* ---------- Навигация ---------- */
 .nav-outer{position:fixed;top:14px;left:0;right:0;z-index:100;padding:0 20px}
-.nav{max-width:1120px;margin:0 auto;border-radius:18px;padding:10px 12px 10px 20px;display:flex;align-items:center;gap:8px}
+.nav{max-width:1240px;margin:0 auto;border-radius:18px;padding:10px 12px 10px 20px;display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;align-items:center;gap:12px}
 .logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:18px;letter-spacing:-.01em;text-decoration:none;color:var(--text);white-space:nowrap;flex-shrink:0}
-.logo-mark{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,#8B5CF6,#5B21B6);display:grid;place-items:center;box-shadow:0 4px 14px var(--accent-glow)}
-.logo-mark svg{width:18px;height:18px;stroke:#fff;stroke-width:2;stroke-linecap:round;fill:none}
-.nav-links{display:flex;gap:4px;margin-left:16px;margin-right:auto}
+.logo-mark{display:block;width:36px;height:36px;object-fit:contain;flex:none;filter:drop-shadow(0 4px 8px var(--accent-glow))}
+.nav-links{display:flex;align-items:center;justify-content:center;gap:2px;min-width:0}
 .nav-links a{
-  text-decoration:none;color:var(--muted);font-size:14.5px;font-weight:600;
-  padding:9px 15px;border-radius:11px;transition:all .35s var(--ease);
+  text-decoration:none;color:var(--muted);font-size:14px;font-weight:600;white-space:nowrap;line-height:1.4;
+  padding:11px 12px;border-radius:11px;transition:color .25s var(--ease),background .25s var(--ease);
 }
 .nav-links a:hover{color:var(--accent-deep);background:rgba(124,58,237,.09)}
 .nav-links a.active{color:var(--accent-deep);background:rgba(124,58,237,.13);box-shadow:inset 0 0 0 1px rgba(124,58,237,.16)}
-.btn-nav{padding:11px 22px;font-size:14.5px;border-radius:12px;margin-left:auto;flex-shrink:0}
-@media(max-width:1100px){.nav-links a{display:none}.nav-links a[href="#donate"],.nav-links a[href="https://t.me/zaurafork"]{display:block}}
+.btn-nav{padding:11px 18px;font-size:14px;border-radius:12px;justify-content:center;white-space:nowrap;min-height:44px}
+@media(max-width:1180px){
+  .nav{grid-template-columns:minmax(0,1fr) auto auto}
+  .nav-links{grid-column:1/-1;grid-row:2;flex-wrap:wrap;border-top:1px solid var(--stroke);padding-top:8px}
+  .hero{padding-top:220px}
+}
 
 /* ---------- Hero ---------- */
 .hero{padding:190px 0 100px;text-align:center}
@@ -143,7 +153,7 @@ h2{font-size:clamp(30px,4vw,44px);font-weight:800;letter-spacing:-.02em;line-hei
 .mini-pill{font-size:12.5px;font-weight:700;color:var(--accent-deep);background:var(--accent-soft);border-radius:999px;padding:7px 14px;white-space:nowrap}
 
 /* ---------- Карточки возможностей ---------- */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,310px),1fr));gap:20px}
 .card{border-radius:var(--radius);padding:28px;transition:transform .5s var(--spring),box-shadow .5s var(--ease)}
 .card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
 .card .ico{width:46px;height:46px;border-radius:14px;background:var(--accent-soft);display:grid;place-items:center;color:var(--accent);margin-bottom:18px;transition:transform .5s var(--spring)}
@@ -153,7 +163,7 @@ h2{font-size:clamp(30px,4vw,44px);font-weight:800;letter-spacing:-.02em;line-hei
 .card .tag{display:inline-block;margin-top:14px;font-size:12px;font-weight:700;color:var(--accent-deep);background:var(--accent-soft);padding:5px 11px;border-radius:999px}
 
 /* ---------- Шаги ---------- */
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px}
 .step{border-radius:var(--radius);padding:32px 28px;position:relative;overflow:hidden}
 .step .num{
   font-size:64px;font-weight:800;line-height:1;letter-spacing:-.04em;
@@ -173,7 +183,7 @@ h2{font-size:clamp(30px,4vw,44px);font-weight:800;letter-spacing:-.02em;line-hei
 .win-btn-2{background:rgba(124,58,237,.45)}
 .win-btn-3{background:rgba(124,58,237,.25)}
 .win-title{margin-left:10px;font-size:12.5px;font-weight:600;color:var(--muted)}
-.win-body{display:grid;grid-template-columns:200px 1fr;min-height:380px}
+.win-body{display:grid;grid-template-columns:200px minmax(0,1fr);min-height:380px}
 .win-side{padding:18px 12px;border-right:1px solid var(--stroke);background:rgba(255,255,255,.35);display:flex;flex-direction:column;gap:4px}
 .win-nav{display:flex;align-items:center;gap:11px;padding:10px 13px;border-radius:11px;font-size:13.5px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .35s var(--ease)}
 .win-nav .icon{width:17px;height:17px}
@@ -259,14 +269,22 @@ html.reduce-motion .reveal{transition:opacity .1s linear;transform:none}
 html.reduce-motion .btn,html.reduce-motion .card,html.reduce-motion .chip,html.reduce-motion .switch::after{transition-duration:.1s}
 
 @media (max-width:900px){
-  .win-body{grid-template-columns:1fr}
+  .win-body{grid-template-columns:minmax(0,1fr)}
   .win-side{flex-direction:row;overflow-x:auto;border-right:none;border-bottom:1px solid var(--stroke)}
   .win-nav{white-space:nowrap}
   section{padding:72px 0}
 }
 @media (max-width:640px){
-  .nav-links{display:none}
-  .hero{padding:140px 0 72px}
+  .nav-outer{padding:0 12px;top:10px}
+  .nav{grid-template-columns:minmax(0,1fr) auto;padding:12px;gap:8px}
+  .nav-links{gap:2px}
+  .nav-links a{font-size:12px;padding:8px 9px}
+  .nav .btn-nav{grid-column:1/-1;grid-row:3}
+  .win-main{min-width:0;padding:16px}
+  .win-card .row{flex-wrap:wrap}
+  .win-card .mini-pill{max-width:100%;white-space:normal}
+  .win-log{overflow-wrap:anywhere}
+  .hero{padding:260px 0 72px}
   .hero-status{grid-template-columns:auto 1fr;padding:20px}
   .hero-status .mini-pill{display:none}
 }
@@ -276,11 +294,22 @@ html[data-theme="dark"] .hero h1 .grad{background-image:linear-gradient(120deg,#
 html[data-theme="dark"] .hero-note,html[data-theme="dark"] .win-side,html[data-theme="dark"] .win-card{background:var(--glass)}
 html[data-theme="dark"] .dl,html[data-theme="dark"] .donate-panel{background:linear-gradient(135deg,#30273b,#3d2b50)}
 html[data-theme="dark"] .btn-glass:hover{background:var(--glass-strong)}
-.site-preferences{display:flex;align-items:center;gap:8px;flex-shrink:0}.site-preferences a,.site-preferences select{font:600 12px inherit;color:var(--text);background:var(--glass-strong);border:1px solid var(--stroke);border-radius:10px;padding:9px;text-decoration:none;min-height:36px}.site-preferences select{font-family:inherit;font-size:12px;max-width:124px}
-@media(max-width:640px){.nav{flex-wrap:wrap}.nav .btn-nav{padding:10px 14px}.site-preferences{margin-left:auto}.hero{padding-top:185px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.blob,.status-dot::before,.win-run::after{animation:none}.reveal{opacity:1;transform:none;transition:none}}
+html[data-theme="dark"]{--scroll-thumb:rgba(200,168,255,.4);--scroll-hover:rgba(200,168,255,.7)}
+.site-preferences{display:flex;align-items:center;gap:8px;justify-self:end}
+.site-preferences [data-language-link]{display:grid;place-items:center;min-width:44px;min-height:44px;padding:8px;font-family:inherit;font-size:12px;font-weight:700;line-height:1;color:var(--muted);background:var(--glass-strong);border:1px solid var(--stroke);border-radius:12px;text-decoration:none;transition:background .2s,color .2s}
+.site-preferences [data-language-link]:hover{color:var(--accent-deep);background:var(--accent-soft)}
+.theme-picker{display:flex;gap:2px;padding:3px;border:1px solid var(--stroke);border-radius:13px;background:var(--glass-strong)}
+.theme-picker button{appearance:none;position:relative;display:grid;place-items:center;width:36px;height:36px;padding:0;border:1px solid transparent;border-radius:9px;background:transparent;color:var(--muted);cursor:pointer;transition:background .2s,color .2s,box-shadow .2s}
+.theme-picker .icon{width:18px;height:18px;pointer-events:none}
+.theme-picker button::after{content:attr(aria-label);position:absolute;top:calc(100% + 10px);right:0;z-index:5;width:max-content;padding:8px 10px;border:1px solid var(--stroke);border-radius:10px;background:var(--glass-modal);color:var(--text);box-shadow:var(--shadow);font:600 12px/1.4 'Manrope',sans-serif;opacity:0;visibility:hidden;pointer-events:none}
+.theme-picker button:not(:disabled):hover::after,.theme-picker button:focus-visible::after{opacity:1;visibility:visible}
+.theme-picker button:hover{color:var(--accent-deep);background:var(--accent-soft)}
+.theme-picker button[aria-checked="true"]{color:var(--accent-deep);background:var(--accent-soft);border-color:var(--accent-glow);box-shadow:0 2px 8px var(--accent-glow)}
+.theme-picker button:disabled{cursor:default;opacity:.55}
+html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{transition:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.blob,.status-dot::before,.win-run::after{animation:none}.reveal{opacity:1;transform:none;transition:none}.theme-picker button,.site-preferences a,.nav-links a{transition:none}}
 @media(prefers-reduced-transparency:reduce){.glass,.btn-glass,.chip{background:var(--glass-modal);backdrop-filter:none}}
-@media(forced-colors:active){body,.glass,.dl,.donate-panel,.win-card{background:Canvas;color:CanvasText;box-shadow:none}.hero h1 .grad{background:none;-webkit-text-fill-color:CanvasText}.btn,.site-preferences a,.site-preferences select{border:1px solid ButtonText}}
+@media(forced-colors:active){html{scrollbar-color:auto}body,.glass,.dl,.donate-panel,.win-card{background:Canvas;color:CanvasText;box-shadow:none}.hero h1 .grad{background:none;-webkit-text-fill-color:CanvasText}.btn,.site-preferences a,.theme-picker{border:1px solid ButtonText}.theme-picker button{color:ButtonText;box-shadow:none}.theme-picker button[aria-checked="true"]{border:2px solid Highlight;color:Highlight}}
 </style>
 </head>
 <body>
@@ -295,9 +324,7 @@ html[data-theme="dark"] .btn-glass:hover{background:var(--glass-strong)}
 <div class="nav-outer">
   <nav class="nav glass" aria-label="Основная навигация">
     <a class="logo" href="#top" aria-label="Z-Aura — на главную">
-      <span class="logo-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24"><path d="M12 3 4 9l8 12 8-12-8-6Z"/><path d="M4 9h16"/></svg>
-      </span>
+      <img class="logo-mark" src="assets/logo.png" alt="" width="36" height="36">
       Z-Aura
     </a>
     <div class="nav-links">
@@ -308,7 +335,17 @@ html[data-theme="dark"] .btn-glass:hover{background:var(--glass-strong)}
       <a href="#donate">Пожертвования</a>
       <a href="https://t.me/zaurafork" target="_blank" rel="noopener noreferrer">Telegram</a>
     </div>
-    <div class="site-preferences" aria-label="Язык и оформление"><a href="index.en.html" lang="en" data-language-link>ENG</a><select data-theme-switch aria-label="Тема сайта"><option value="light">Светлая тема</option><option value="dark">Тёмная тема</option></select></div>
+    <div class="site-preferences" aria-label="Язык и оформление">
+      <a href="index.en.html" lang="en" data-language-link>ENG</a>
+      <div class="theme-picker" data-theme-picker role="radiogroup" aria-label="Тема сайта">
+        <button type="button" role="radio" data-theme-choice="light" aria-checked="true" aria-label="Светлая тема" tabindex="0" disabled>
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+        </button>
+        <button type="button" role="radio" data-theme-choice="dark" aria-checked="false" aria-label="Тёмная тема" tabindex="-1" disabled>
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg>
+        </button>
+      </div>
+    </div>
     <a class="btn btn-primary btn-nav" href="https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe" title="Скачать Z-Aura.exe из последнего опубликованного GitHub Release">
       <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
       Скачать
@@ -617,9 +654,7 @@ html[data-theme="dark"] .btn-glass:hover{background:var(--glass-strong)}
   <div class="wrap">
     <div class="foot">
       <a class="logo" href="#top">
-        <span class="logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M12 3 4 9l8 12 8-12-8-6Z"/><path d="M4 9h16"/></svg>
-        </span>
+        <img class="logo-mark" src="assets/logo.png" alt="" width="36" height="36" loading="lazy">
         Z-Aura
       </a>
       <nav class="foot-links" aria-label="Дополнительно">
@@ -679,6 +714,7 @@ html[data-theme="dark"] .btn-glass:hover{background:var(--glass-strong)}
   }
 
   // Активный пункт навигации
+  function headerOffset(){ return document.querySelector('.nav').getBoundingClientRect().bottom + 20; }
   var links = document.querySelectorAll('.nav-links a');
   var sections = [];
   links.forEach(function(a){
@@ -688,7 +724,7 @@ html[data-theme="dark"] .btn-glass:hover{background:var(--glass-strong)}
     if (s) sections.push({a:a, s:s});
   });
   window.addEventListener('scroll', function(){
-    var y = window.scrollY + 140, cur = null;
+    var y = window.scrollY + headerOffset(), cur = null;
     sections.forEach(function(o){ if (o.s.offsetTop <= y) cur = o; });
     links.forEach(function(a){ a.classList.remove('active'); });
     if (cur) cur.a.classList.add('active');
@@ -715,7 +751,7 @@ html[data-theme="dark"] .btn-glass:hover{background:var(--glass-strong)}
       var t = document.querySelector(id);
       if (!t) return;
       ev.preventDefault();
-      window.scrollTo({top: t.offsetTop - 96, behavior:
+      window.scrollTo({top: t.offsetTop - headerOffset(), behavior:
         document.documentElement.classList.contains('reduce-motion') ? 'auto' : 'smooth'});
     });
   });

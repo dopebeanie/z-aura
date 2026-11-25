@@ -1,0 +1,1 @@
+Z-Aura — портативный Windows-интерфейс для zapret: все 22 стратегии, свои профили, редактор доменов/IP и fake-файлов. Встроенный Telegram Proxy с ON/OFF, конфигом и журналом. Discord Presence: Alt + Zapret + Proxy. Стеклянный UI, светлая/тёмная темы, трей. Один EXE без установки Python и .NET. Это не VPN. Новости и changelog: https://t.me/zaurafork
