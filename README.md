@@ -314,7 +314,8 @@ Keep their licenses/notices and comply with applicable corresponding-source obli
 [bol-van/zapret](https://github.com/bol-van/zapret) ·
 [WinDivert](https://reqrypt.org/windivert.html) · [Inter](https://rsms.me/inter/)
 
-[Terms](https://dopebeanie.github.io/cl3j1hdh7dbb2dzx/terms.html) ·
-[Privacy](https://dopebeanie.github.io/cl3j1hdh7dbb2dzx/privacy.html)
-— local legal source now includes OAuth/statistics, updater network requests and optional support.
-The public pages were not redeployed and require disclosure review before distributing this candidate.
+[Terms](https://dopebeanie.github.io/z-aura-confidentiality-policy/terms.html) ·
+[Privacy](https://dopebeanie.github.io/z-aura-confidentiality-policy/privacy.html)
+— the owner-approved 25.11.2026 RU/ENG legal site includes DPAPI sessions, OAuth/statistics,
+updater network requests and optional support. The final local package has no draft banner;
+public deployment and Discord verification remain separate. See [legal-site report](docs/LEGAL-SITE-FINAL-0.3.2.md).
