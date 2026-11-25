@@ -4,7 +4,7 @@
   <p><strong>Ваш поток. Ваши правила.<br>Your flow. Your rules.</strong></p>
   <p>Нативный интерфейс для zapret · Windows 10/11 x64 · Один portable EXE</p>
   <p>
-    <img src="https://img.shields.io/badge/version-0.3.1-7C3AED?style=flat-square" alt="Version 0.3.1">
+    <img src="https://img.shields.io/badge/version-0.3.2-7C3AED?style=flat-square" alt="Version 0.3.2">
     <img src="https://img.shields.io/badge/.NET_10-WPF-8B5CF6?style=flat-square" alt=".NET 10 / WPF">
     <img src="https://img.shields.io/badge/Interface-RU_%2F_ENG-A78BFA?style=flat-square" alt="RU / ENG">
   </p>
@@ -18,7 +18,20 @@
 > **Не VPN.** Z-Aura не скрывает IP, не добавляет VPN-шифрование и не гарантирует анонимность или доступность сайтов.
 > **Not a VPN.** Z-Aura does not hide your IP, add VPN encryption or guarantee anonymity or connectivity.
 
-## Новое в Z-Aura 0.3.1 / What's new
+## Новое в Z-Aura 0.3.2 / What's new
+
+- **Проверка обновлений:** старый официальный тег `Z-Aura` с однозначной строкой `Version: x.y.z`, а также числовые/брендированные стабильные теги. EXE, SHA-256, лимиты и подтверждение установки по-прежнему обязательны.
+- **Кликабельный мини-оверлей:** независимые кнопки Zapret и Telegram Proxy используют существующие start/stop-контроллеры. Занятый Zapret не блокирует управление Proxy.
+- **Возврат из Discord:** восстановление того же окна из трея/свёрнутого состояния и запрос переднего плана Windows, включая открытый диалог. Не запускает второй экземпляр.
+- **Статусы:** текст и точки `ZAPRET`, `MTPROTO` и локального слушателя выровнены без абзацных отступов.
+- **Сайты RU/ENG + темы:** главная, локальная страница возврата и все юридические страницы. Тема публичных страниц сохраняется локально; callback работает без JavaScript.
+- **Сохранённый вход Discord:** access/refresh-токены и профиль защищены Windows DPAPI CurrentUser; восстановление после перезапуска, обновление токена и удаление при выходе. Ошибка сети не удаляет сеанс.
+
+**English:** legacy release compatibility without weakening update checks; independent clickable overlay actions;
+existing-window foreground restoration; aligned status dots/text; RU/ENG + dark/light websites;
+Windows-user-protected remembered Discord sessions with refresh and explicit sign-out deletion.
+
+### Сохранено из 0.3.1 / Retained features
 
 **Update · обновления приложения, Donate и исправления Discord Return / фокуса.**
 
@@ -81,7 +94,7 @@ the details and recipient. Z-Aura never asks for your CVV, PIN or verification c
 | **Пожертвования · RU** | **Donate · ENG** |
 | ![Добровольная поддержка Z-Aura](Z-Aura-GitHub/assets/screenshots/donate-ru.png) | ![Optional donations in English](Z-Aura-GitHub/assets/screenshots/donate-en.png) |
 | **Внешний вид / Appearance** | **Discord Return · браузер / browser** |
-| ![Переключатели без залипшей обводки](Z-Aura-GitHub/assets/screenshots/appearance-light.png) | ![Настоящая локальная страница возврата Discord 0.3.1](Z-Aura-GitHub/assets/screenshots/discord-return.png) |
+| ![Переключатели без залипшей обводки](Z-Aura-GitHub/assets/screenshots/appearance-light.png) | ![Настоящая локальная страница возврата Discord 0.3.2](Z-Aura-GitHub/assets/screenshots/discord-return.png) |
 
 <sub>Снимки настоящего WPF-интерфейса из автоматических проверок. Данные и состояния тестовые;
 скриншоты не подтверждают живое подключение к Discord, Telegram или обход DPI.</sub>
@@ -121,7 +134,9 @@ the details and recipient. Z-Aura never asks for your CVV, PIN or verification c
 списки и установленный runtime службы не заменяются. Резервный EXE и результат операции остаются
 в соседней папке `.zaura-update-<GUID>`; при отказе запуска выполняется откат замены.
 SHA-256 из GitHub проверяет целостность, но не заменяет подпись издателя или доверие к репозиторию.
-Только стабильные теги `vMAJOR.MINOR.PATCH` / `MAJOR.MINOR.PATCH`, без downgrade и prerelease.
+Стабильные числовые теги, варианты `Z-Aura-vMAJOR.MINOR.PATCH` / `Z-Aura-MAJOR.MINOR.PATCH`,
+а также ограниченный старый тег `Z-Aura` с единственной строкой `Version: x.y.z`;
+без угадывания версии из произвольного текста, downgrade и prerelease.
 
 ### Скачать и начать
 
@@ -140,9 +155,9 @@ SHA-256 из GitHub проверяет целостность, но не зам�
 - **Вход доступен обычным пользователям, не только автору Z-Aura.** Каждый подтверждает доступ к своему публичному профилю в браузере; доступа к Developer Portal ему не нужно.
 - Кнопка находится внизу левой панели, **над Telegram-каналом**. После входа здесь показываются аватар, имя и `@username`; нажатие открывает выход из профиля.
 - Z-Aura запрашивает только **`identify`**, без email, серверов, друзей и сообщений. Пароль, bot token и Client Secret в приложение не вводятся.
-- После ответа Discord локальная страница предлагает вернуться в Z-Aura. Кнопка доступна 90 секунд; если окно не появилось, откройте его через значок в трее. Результат входа показывается в приложении, не объявляется страницей автоматически.
+- После ответа Discord локальная страница предлагает вернуться в Z-Aura. Кнопка доступна 10 минут; восстанавливает то же окно и запрашивает передний план Windows. Если Windows запретила фокус, используйте значок в трее. Результат входа показывается в приложении, не объявляется страницей автоматически.
 - `127.0.0.1` ведёт на компьютер самого пользователя. Страница, логотип и шрифт встроены в EXE; хостинг, аналитика и внешние ресурсы страницы не нужны.
-- Токен, профиль и аватар остаются в памяти, не сохраняются на диск и очищаются при выходе/истечении сеанса. После завершения Z-Aura нужен новый вход. Аватар загружается с Discord CDN без bearer-токена и дискового кэша; при ошибке остаётся локальная иконка.
+- Access/refresh-токены, срок действия и профиль сохраняются в `discord-session.bin` с Windows DPAPI CurrentUser, не открытым текстом в настройках. Вход переживает закрытие приложения/ПК; истёкший токен обновляется через Discord. Выход удаляет локальный сеанс до попытки отзыва через сеть. Другой ПК/аккаунт Windows требует нового входа; защита не спасает от вредоносного ПО с правами текущего пользователя. Аватар остаётся только в памяти, загружается без bearer-токена и дискового кэша.
 
 <details>
 <summary><strong>Владельцу приложения: Redirect URI и ошибка «некорректный redirect_uri»</strong></summary>
@@ -157,7 +172,8 @@ http://127.0.0.1:43827/oauth/callback
 Точный `http`, IP, порт и путь, **без `/` в конце**. Это не поле Interactions Endpoint
 и не адрес Terms/Privacy. После сохранения отмените старую попытку и начните вход заново.
 Один зарегистрированный URI подходит всем пользователям: listener работает у каждого локально.
-S256 PKCE позволяет обмен кода без Client Secret; refresh token Z-Aura не сохраняет и не обновляет.
+S256 PKCE позволяет обмен кода без Client Secret; refresh token сохраняется защищённо и обновляется,
+если Discord выдаёт его и разрешает обновление публичному клиенту. Живой lifecycle требует проверки.
 Public Bot не относится к этому входу. Живой вход вторым аккаунтом ещё не проверен.
 
 </details>
@@ -209,11 +225,14 @@ a running local Z-Aura and access to Discord, not Developer Portal permissions.
 The sign-in button sits above the Telegram channel in the lower sidebar. After authorization
 it shows a round avatar, display name and `@username`. The bundled RU/ENG return page offers
 **Return to the app**, restoring the existing GUI without a new process or Windows URL protocol.
-The button lasts 90 seconds; use the tray icon if focus is denied or the listener has expired.
+The button lasts 10 minutes; use the tray icon if Windows denies foreground focus or the listener has expired.
 Sign-in success/failure stays in the GUI. Live OAuth with another account remains unverified.
 
-Tokens/profile/avatar stay in memory only; no refresh token is retained. CDN avatar fetches
-use no bearer header or disk cache. Account identity is not sent to Rich Presence.
+Tokens, expiry and profile are saved in `discord-session.bin` using Windows DPAPI CurrentUser.
+Sign-in is remembered across restart; refresh rotates credentials and offline errors retain the grant.
+Sign-out deletes local credentials before attempting online revocation. Another Windows account/PC
+requires new sign-in; malware with your user permissions is outside this protection.
+CDN avatars remain memory-only, with no bearer header or disk cache. Account identity is not sent to Rich Presence.
 The local page has no scripts, analytics, external assets or hosting requirement.
 
 ### Storage and privacy
@@ -248,35 +267,37 @@ Build requirements: Windows x64, .NET SDK 10.0.x with WindowsDesktop, Node 24+ a
 
 ```powershell
 # After initial dependency restore/setup; do not overwrite a running EXE.
-node scripts/build-portable.mjs --output-dir artifacts/portable-update-0.3.1
-node scripts/verify-portable.mjs --artifact-dir artifacts/portable-update-0.3.1
+node scripts/build-portable.mjs --output-dir artifacts/portable-comfort-0.3.2
+node scripts/verify-portable.mjs --artifact-dir artifacts/portable-comfort-0.3.2
 node --test tests/*.test.mjs
 dotnet run --project scripts/localization-audit -- "$PWD"
 ```
 
-**Current local candidate:** `artifacts/portable-update-0.3.1/Z-Aura.exe` · **0.3.1.0** ·
-**96 348 672 bytes / 91.89 MiB**. Previous 0.3.0 EXE retained separately, not overwritten.
+**Current local candidate:** `artifacts/portable-comfort-0.3.2/Z-Aura.exe` · **0.3.2.0** ·
+**96 389 120 bytes / 91.92 MiB**. Delivered 0.3.1 and retained 0.3.0 stay separate, not overwritten.
 
 ```text
-SHA-256 8c1cfe9b49d0d38e53b14048e6e5330a2064ad4329fb1a509691ad78c936fdd4
+SHA-256 175dd7802f5419bfa5ba8c1dae75c3116b7e8c2b72504f5e0ac158c48a642ded
 ```
 
-Latest checks: **1,700 backend assertions**, **273 GUI PASS records** (RU/ENG, normal/minimum
-sizes, update/donation labels, focus cues and isolated HTTP return restoring a hidden/minimized WPF window),
-**64 Node tests** (including documentation) and **678 localization fragments**.
-A real Chromium form POST now sends the exact local Origin, receives 303 and shows a return
-acknowledgement; `Origin: null` stays rejected. The self-contained unprivileged test payload also passed
-1,700 assertions with an invalid `DOTNET_ROOT`. These fixtures do **not** establish live
-OAuth/Telegram, real ISP/video, elevated winws/hosts/service/reboot or clean-Windows acceptance.
+Latest checks: **1,766 backend assertions**, **278 GUI PASS records**, **69 Node tests**
+and **696 localization fragments**. Chromium accepted the real form after switching language/theme;
+the strict Origin/nonce guard remains. Main/legal pages passed 375 px layout checks in both languages/themes.
+The separate self-contained asInvoker payload passed **1,736 assertions** with an invalid `DOTNET_ROOT`
+and the optional console fixture omitted. Full packaged attempts failed at the existing native console READY
+fixture (ordinary framework-dependent backend passed that fixture); this is retained as a test gap, not hidden.
+These fixtures do **not** establish live OAuth/refresh/reboot, Telegram, real ISP/video,
+elevated winws/hosts/service or clean-Windows acceptance.
 Tests are recorded for this candidate, not automatically for later rebuilds.
 
 - [Current verification](docs/DESKTOP-VERIFICATION.md)
+- [0.3.2 changes, session security and remaining acceptance](docs/COMFORT-0.3.2.md)
 - [0.3.1 update behavior and release requirements](docs/UPDATE-0.3.1.md)
 - [Comfort Update, Discord return/security and owner setup](docs/COMFORT-UPDATE.md)
 - [Desktop architecture and build](docs/DESKTOP-PORTABLE.md)
 - [Telegram Proxy](docs/TELEGRAM-PROXY.md) · [Discord Presence](docs/DISCORD-PRESENCE.md)
 - [DNS/hosts wizard](docs/HOSTS-REPAIR.md)
-- [Telegram announcement · plain text](docs/TELEGRAM-POST-0.3.1.txt)
+- [Telegram announcement · plain text](docs/TELEGRAM-POST-0.3.2.txt)
 
 ## Авторы и лицензии / Credits and licensing
 

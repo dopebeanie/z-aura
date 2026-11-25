@@ -1,5 +1,28 @@
 # Z-Aura — current candidate verification
 
+## Current: 0.3.2 / 0.3.2.0 (2026-11-25)
+
+Separate candidate `artifacts/portable-comfort-0.3.2/Z-Aura.exe`:
+**96,389,120 bytes / 91.923828125 MiB**, SHA-256
+`175dd7802f5419bfa5ba8c1dae75c3116b7e8c2b72504f5e0ac158c48a642ded`.
+Both production manifests remain requireAdministrator. Delivered 0.3.1 and retained 0.3.0 stay intact.
+
+Passed: **1,766 backend assertions**, **278 GUI PASS**, **69 Node tests**, **696 localization
+fragments**; real Chromium return with EN/dark switching; main/all legal pages at 375 px in
+both languages/themes; actual Windows DPAPI persistence/rotation/revocation/offline fixtures.
+Separate self-contained asInvoker payload passed **1,736 assertions** with invalid DOTNET_ROOT
+and optional console fixture omitted. Full packaged console attempts failed at existing READY
+checks; framework-dependent console tests passed. This gap remains open.
+
+Current evidence: `artifacts/comfort-0.3.2-self-test.txt`,
+`artifacts/comfort-0.3.2-final-ui-smoke/report.txt`, `artifacts/comfort-0.3.2-node-test.txt`,
+`artifacts/comfort-0.3.2-packaged-without-console-self-test.txt`,
+`artifacts/browser-return-0.3.2/result.json`, `artifacts/portable-comfort-0.3.2-verification.json`.
+See [COMFORT-0.3.2.md](COMFORT-0.3.2.md) for exact scope, site draft approval and remaining live tests.
+No production run/UAC, user settings/hosts/service changes, publishing, deployment or Portal edits.
+
+## Historical: delivered 0.3.1 (retained evidence)
+
 Updated 2026-11-24. Current build: **0.3.1 / 0.3.1.0**, application updates, optional support,
 Discord Return/referrer fix and keyboard/mouse focus cues. This is a local test candidate,
 not a published or fully accepted release. The retained 0.3.0 candidate was not overwritten.

@@ -1,5 +1,9 @@
 # Z-Aura 0.3.0 — Comfort Update
 
+**Historical design:** memory-only OAuth and a 90-second return listener. Current 0.3.2
+supersedes those details; see [COMFORT-0.3.2.md](COMFORT-0.3.2.md) for protected persistent
+sessions, refresh, foreground restoration and RU/ENG + theme websites.
+
 Historical 0.3.0 candidate: `artifacts/portable-discord-return/Z-Aura.exe` (0.3.0.0), including the
 Comfort, layout/sidebar and Discord-return changes. Old intermediate EXEs are intentionally
 removed in the user-approved cleanup; current user settings, runtime inputs, the supplied

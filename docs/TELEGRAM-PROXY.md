@@ -9,7 +9,7 @@ This is limited protocol evidence, not full Telegram Desktop/media acceptance;
 the build-stage test results and remaining acceptance gaps below are historical.
 
 Date: 24.11.2026. Scope: the **.NET 10/WPF application**, not the archived React/Tauri prototype.
-Current candidate: `artifacts/portable-update-0.3.1/Z-Aura.exe`; latest evidence is in
+Current candidate: `artifacts/portable-comfort-0.3.2/Z-Aura.exe`; latest evidence is in
 [DESKTOP-VERIFICATION.md](DESKTOP-VERIFICATION.md). Build-stage hashes/report paths further
 below are historical; those intermediate outputs were intentionally removed during the
 user-approved cleanup. User data/live sessions are not changed. No commit, push, release or Portal upload is performed.

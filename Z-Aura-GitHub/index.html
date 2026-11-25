@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
+  color-scheme:light;
   --accent:#7C3AED;
   --accent-2:#A78BFA;
   --accent-deep:#5B21B6;
@@ -269,6 +270,17 @@ html.reduce-motion .btn,html.reduce-motion .card,html.reduce-motion .chip,html.r
   .hero-status{grid-template-columns:auto 1fr;padding:20px}
   .hero-status .mini-pill{display:none}
 }
+html[data-theme="dark"]{color-scheme:dark;--text:#f3ecff;--muted:#c4b9d3;--accent:#b997ff;--accent-deep:#d0b3ff;--accent-soft:rgba(180,135,255,.16);--glass:rgba(40,33,49,.82);--glass-strong:rgba(48,39,59,.95);--glass-modal:#30273b;--stroke:rgba(205,176,239,.24);--shadow:0 8px 32px #0003;--shadow-lg:0 24px 64px #0005}
+html[data-theme="dark"] body{background:linear-gradient(160deg,#1c1825,#281e36 55%,#241b30)}
+html[data-theme="dark"] .hero h1 .grad{background-image:linear-gradient(120deg,#b997ff,#dfcaff,#c5a2ff)}
+html[data-theme="dark"] .hero-note,html[data-theme="dark"] .win-side,html[data-theme="dark"] .win-card{background:var(--glass)}
+html[data-theme="dark"] .dl,html[data-theme="dark"] .donate-panel{background:linear-gradient(135deg,#30273b,#3d2b50)}
+html[data-theme="dark"] .btn-glass:hover{background:var(--glass-strong)}
+.site-preferences{display:flex;align-items:center;gap:8px;flex-shrink:0}.site-preferences a,.site-preferences select{font:600 12px inherit;color:var(--text);background:var(--glass-strong);border:1px solid var(--stroke);border-radius:10px;padding:9px;text-decoration:none;min-height:36px}.site-preferences select{font-family:inherit;font-size:12px;max-width:124px}
+@media(max-width:640px){.nav{flex-wrap:wrap}.nav .btn-nav{padding:10px 14px}.site-preferences{margin-left:auto}.hero{padding-top:185px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.blob,.status-dot::before,.win-run::after{animation:none}.reveal{opacity:1;transform:none;transition:none}}
+@media(prefers-reduced-transparency:reduce){.glass,.btn-glass,.chip{background:var(--glass-modal);backdrop-filter:none}}
+@media(forced-colors:active){body,.glass,.dl,.donate-panel,.win-card{background:Canvas;color:CanvasText;box-shadow:none}.hero h1 .grad{background:none;-webkit-text-fill-color:CanvasText}.btn,.site-preferences a,.site-preferences select{border:1px solid ButtonText}}
 </style>
 </head>
 <body>
@@ -296,6 +308,7 @@ html.reduce-motion .btn,html.reduce-motion .card,html.reduce-motion .chip,html.r
       <a href="#donate">Пожертвования</a>
       <a href="https://t.me/zaurafork" target="_blank" rel="noopener noreferrer">Telegram</a>
     </div>
+    <div class="site-preferences" aria-label="Язык и оформление"><a href="index.en.html" lang="en" data-language-link>ENG</a><select data-theme-switch aria-label="Тема сайта"><option value="light">Светлая тема</option><option value="dark">Тёмная тема</option></select></div>
     <a class="btn btn-primary btn-nav" href="https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe" title="Скачать Z-Aura.exe из последнего опубликованного GitHub Release">
       <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
       Скачать
@@ -308,7 +321,7 @@ html.reduce-motion .btn,html.reduce-motion .card,html.reduce-motion .chip,html.r
   <div class="wrap">
     <span class="eyebrow reveal">
       <svg class="icon" style="width:15px;height:15px" viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m6.08 9.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/></svg>
-      Z-Aura 0.3.1 · тестовый кандидат
+      Z-Aura 0.3.2 · тестовый кандидат
     </span>
     <h1 class="reveal">Полный контроль над <span class="grad">zapret</span> — без единого bat-файла</h1>
     <p class="lead reveal">
@@ -336,10 +349,10 @@ html.reduce-motion .btn,html.reduce-motion .card,html.reduce-motion .chip,html.r
         <svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
       </span>
       <div>
-        <div class="st-title">Z-Aura 0.3.1 · Update</div>
-        <div class="st-sub">Обновления приложения · Discord Return · визуальные детали</div>
+        <div class="st-title">Z-Aura 0.3.2 · Comfort</div>
+        <div class="st-sub">Кликабельный оверлей · сохранённый вход Discord · RU / ENG</div>
       </div>
-      <span class="mini-pill">0.3.1 · candidate</span>
+      <span class="mini-pill">0.3.2 · candidate</span>
     </div>
   </div>
 </section>
@@ -357,7 +370,7 @@ html.reduce-motion .btn,html.reduce-motion .card,html.reduce-motion .chip,html.r
         <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3v13m-5-5 5 5 5-5M4 16v5h16v-5"/></svg></span>
         <h3>Обновления самого Z-Aura</h3>
         <p>Проверка стабильной версии на GitHub, добровольная автозагрузка и проверка SHA-256. Установка — после подтверждения перезапуска, с резервным EXE. Runtime Flowseal не обновляется.</p>
-        <span class="tag">0.3.1 · тестовый кандидат</span>
+        <span class="tag">0.3.2 · тестовый кандидат</span>
       </div>
       <div class="card glass reveal">
         <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="m3 11 18-8-4 18-6-6-4 3 1-5Z"/></svg></span>
@@ -532,7 +545,7 @@ html.reduce-motion .btn,html.reduce-motion .card,html.reduce-motion .chip,html.r
         <span class="ico"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg></span>
         <div>
           <h3>Без обязательного аккаунта</h3>
-          <p>Все возможности доступны без входа. Необязательный Discord OAuth запрашивает только identify; профиль и токен остаются в памяти, не отправляются в Presence.</p>
+          <p>Все возможности доступны без входа. Discord OAuth запрашивает только identify. Сеанс сохраняется с защитой Windows DPAPI для текущего пользователя; выход удаляет его. Данные аккаунта не передаются в Presence.</p>
         </div>
       </div>
       <div class="card glass reveal">
@@ -616,6 +629,7 @@ html.reduce-motion .btn,html.reduce-motion .card,html.reduce-motion .chip,html.r
         <a href="#donate">Пожертвования</a>
         <a href="https://t.me/zaurafork" target="_blank" rel="noopener noreferrer">Telegram · @zaurafork</a>
         <a href="https://github.com/Flowseal/zapret-discord-youtube" rel="noopener">Upstream</a>
+        <a href="https://dopebeanie.github.io/cl3j1hdh7dbb2dzx/privacy.html" rel="noreferrer">Политика конфиденциальности</a>
       </nav>
       <div class="a11y">
         <svg class="icon" style="width:17px;height:17px;color:var(--accent)" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
@@ -624,9 +638,11 @@ html.reduce-motion .btn,html.reduce-motion .card,html.reduce-motion .chip,html.r
       </div>
     </div>
     <p class="copy">© 2026 Z-Aura. Интерфейс сторонний; пакетный движок zapret-discord-youtube принадлежит его авторам.</p>
+    <p class="copy">Выбранная тема сохраняется только в localStorage этого сайта. Аналитика не добавлена. Внешний шрифт загружается с Google Fonts; хостинг и внешние сайты получают обычные данные соединения.</p>
   </div>
 </footer>
 
+<script src="assets/preferences.js"></script>
 <script>
 (function(){
   var copyDonation = document.getElementById('copy-donation');
@@ -634,11 +650,11 @@ html.reduce-motion .btn,html.reduce-motion .card,html.reduce-motion .chip,html.r
     var status = document.getElementById('donation-status');
     try {
       await navigator.clipboard.writeText(document.getElementById('donation-number').textContent.trim());
-      status.textContent = 'Номер карты скопирован. Проверьте получателя в банковском приложении.';
+      status.textContent = document.documentElement.lang === 'en' ? 'Card number copied. Verify the recipient in your banking app.' : 'Номер карты скопирован. Проверьте получателя в банковском приложении.';
     } catch (_) {
       var range = document.createRange(); range.selectNodeContents(document.getElementById('donation-number'));
       var selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range);
-      status.textContent = 'Номер выделен. Скопируйте его вручную.';
+      status.textContent = document.documentElement.lang === 'en' ? 'Number selected. Copy it manually.' : 'Номер выделен. Скопируйте его вручную.';
     }
   });
   // Stagger-появление блоков

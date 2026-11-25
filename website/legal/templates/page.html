@@ -1,34 +1,36 @@
 <!doctype html>
-<html lang="ru">
+<html lang="{{language}}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
   <title>{{title}} · Z-Aura</title>
   <meta name="description" content="{{description}}">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <a class="skip" href="#content">Перейти к содержимому</a>
+  <a class="skip" href="#content">{{skipLabel}}</a>
   <header><div class="wrap">
     <a class="brand" href="index.html">Z-Aura</a>
-    <nav aria-label="Документы приложения">
-      <a href="index.html">О приложении</a>
-      <a href="terms.html">Условия использования</a>
-      <a href="privacy.html">Конфиденциальность</a>
-      <a href="https://t.me/zaurafork" rel="noreferrer">Telegram-канал</a>
+    <nav aria-label="{{navLabel}}">
+      <a href="{{indexPath}}">{{aboutLabel}}</a>
+      <a href="{{termsPath}}">{{termsLabel}}</a>
+      <a href="{{privacyPath}}">{{privacyLabel}}</a>
+      <a href="https://t.me/zaurafork" rel="noreferrer">{{telegramLabel}}</a>
+      <a href="{{otherLanguagePath}}" lang="{{otherLanguage}}" data-language-link>{{languageLabel}}</a>
     </nav>
+    <label class="preferences">{{themeLabel}} <select data-theme-switch aria-label="{{themeLabel}}"><option value="light">{{lightLabel}}</option><option value="dark">{{darkLabel}}</option></select></label>
   </div></header>
   <main id="content" class="wrap">
     {{draftBanner}}
     {{body}}
   </main>
   <footer id="contact" class="wrap">
-    <p>Ответственный за приложение и этот сайт: {{ownerName}}.<br>
-      Связь по вопросам приложения и данных: <a href="{{contactUrl}}">{{contactLabel}}</a>.</p>
-    <p>Z-Aura — независимый проект. Не является продуктом Discord и не одобрен Discord самим фактом размещения этих документов.</p>
-    <p>Новости и changelog: <a href="https://t.me/zaurafork" rel="noreferrer">Telegram · @zaurafork</a>. Для непубличных обращений по данным используйте контакт ответственного выше, а не публичный канал.</p>
+    <p>{{ownerLabel}} {{ownerName}}.<br>{{contactIntro}} <a href="{{contactUrl}}">{{contactLabel}}</a>.</p>
+    <p>{{independence}}</p>
+    <p>{{newsIntro}} <a href="https://t.me/zaurafork" rel="noreferrer">Telegram · @zaurafork</a>. {{privateContact}}</p>
   </footer>
+  <script src="preferences.js"></script>
 </body>
 </html>

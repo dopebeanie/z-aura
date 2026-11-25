@@ -1,4 +1,4 @@
-# Z-Aura 0.3.1 — desktop portable build
+# Z-Aura 0.3.2 — desktop portable build
 
 Project news and changelog: [Telegram · @zaurafork](https://t.me/zaurafork).
 
@@ -6,7 +6,7 @@ Project news and changelog: [Telegram · @zaurafork](https://t.me/zaurafork).
 
 Native **.NET 10 / WPF + C bootstrap compiled with LLVM-MinGW** implementation, compiled without MSVC. React/Tauri is a preserved legacy prototype, not the shipping runtime. Packet engine is the unchanged embedded Flowseal winws, not a rewritten engine.
 
-Current build output: `artifacts/portable-update-0.3.1/Z-Aura.exe`. This is a build candidate, **not a fully accepted release**: clean-machine, elevated driver/service and reboot tests remain outstanding. Never infer those tests from UI screenshots or a successful publish. Latest evidence: [DESKTOP-VERIFICATION.md](DESKTOP-VERIFICATION.md). Application update requirements: [UPDATE-0.3.1.md](UPDATE-0.3.1.md).
+Current build output: `artifacts/portable-comfort-0.3.2/Z-Aura.exe`. This is a build candidate, **not a fully accepted release**: clean-machine, elevated driver/service and reboot tests remain outstanding. Never infer those tests from UI screenshots or a successful publish. Latest evidence: [DESKTOP-VERIFICATION.md](DESKTOP-VERIFICATION.md). New changes/security: [COMFORT-0.3.2.md](COMFORT-0.3.2.md); inherited update requirements: [UPDATE-0.3.1.md](UPDATE-0.3.1.md).
 
 **Telegram integration is included in the current candidate.** Intermediate build outputs
 were removed during the user-approved cleanup, not silently replaced. See
@@ -25,12 +25,12 @@ npm.cmd run import:flowseal -- "D:\zapret"
 node scripts/pack-runtime.mjs "D:\zapret"
 
 # One-file publish and artifact/hash check:
-node scripts/build-portable.mjs --output-dir artifacts/portable-update-0.3.1
-node scripts/verify-portable.mjs --artifact-dir artifacts/portable-update-0.3.1
+node scripts/build-portable.mjs --output-dir artifacts/portable-comfort-0.3.2
+node scripts/verify-portable.mjs --artifact-dir artifacts/portable-comfort-0.3.2
 
 # Equivalent two-step build:
 dotnet publish desktop/Z-Aura/Z-Aura.csproj -c Release -r win-x64 --no-restore --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o artifacts/managed
-node scripts/build-bootstrap.mjs --output-dir artifacts/portable-update-0.3.1
+node scripts/build-bootstrap.mjs --output-dir artifacts/portable-comfort-0.3.2
 ```
 
 The runtime package is already in the desktop source tree. A developer can publish it without the original `D:\zapret`; the original directory is needed only for regenerating/updating upstream payloads. Self-contained .NET 10/WPF is preferable here to Tauri GNU because it is installed on this build machine and does not add a WebView runtime to the clean-machine requirements. Trimming is deliberately disabled for WPF reflection/XAML compatibility. ReadyToRun is disabled and both payload ZIP and single-file compression are enabled. Do **not** use UPX: the saved size is not worth worsening antivirus heuristics. Publisher signing needs an owned code-signing certificate, not an invented certificate or disabling SmartScreen.

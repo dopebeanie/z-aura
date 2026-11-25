@@ -20,5 +20,10 @@ li { margin-block: 8px; }
 .draft { border-color: #b85a13; }
 code { font: .92em ui-monospace, Consolas, monospace; overflow-wrap: anywhere; }
 footer { padding-bottom: 32px; }
-@media (prefers-color-scheme: dark) { :root { --bg: #1c1825; --surface: #282131; --ink: #f3ecff; --muted: #c4b9d3; --accent: #c8a8ff; --line: #4a3d5d; } }
+html[data-theme="dark"] { color-scheme: dark; --bg: #1c1825; --surface: #282131; --ink: #f3ecff; --muted: #c4b9d3; --accent: #c8a8ff; --line: #4a3d5d; }
+html[data-theme="light"] { color-scheme: light; }
+@media (prefers-color-scheme: dark) { html:not([data-theme]) { --bg: #1c1825; --surface: #282131; --ink: #f3ecff; --muted: #c4b9d3; --accent: #c8a8ff; --line: #4a3d5d; } }
+.preferences { display:flex;align-items:center;gap:10px;margin-top:16px;font-size:14px;color:var(--muted); }
+select { font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:7px 10px; }
+select:focus-visible { outline:3px solid var(--accent);outline-offset:3px; }
 @media (forced-colors: active) { main, header, .notice, .draft { border-color: CanvasText; } }
