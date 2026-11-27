@@ -1,0 +1,171 @@
+{
+  "version": "0.3.3",
+  "publication": "local-only",
+  "files": [
+    {
+      "path": "FIXES-0.3.3-UI.md",
+      "bytes": 8271,
+      "sha256": "be242cdc61b8214c7a9d716d81888b03b108bdec7192a82b420dca007f8a8708"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1076,
+      "sha256": "a4137c2fe3758836e4dc95b950adf0c3cb122cd019795e1a04bc9bcdedd8c01e"
+    },
+    {
+      "path": "NOTICE.md",
+      "bytes": 4437,
+      "sha256": "bc64097b56e28cc0a761f270ca4772e28a3ed9797e8c792fce021091228c6a30"
+    },
+    {
+      "path": "README.md",
+      "bytes": 11196,
+      "sha256": "2677412a6c409d14ba575b74761ae0cbe066f6f128453c2ac017cb32a66382bf"
+    },
+    {
+      "path": "START-HERE.txt",
+      "bytes": 2192,
+      "sha256": "146b5cb4d359acadfe996e263bf1a935f18ab9c7b5f2c5221554cd17a684054f"
+    },
+    {
+      "path": "TELEGRAM-POST.txt",
+      "bytes": 3769,
+      "sha256": "96113768527238b9bdcf09b20734aa4c02fc96c82c1bf10e41d34420dc79b7ad"
+    },
+    {
+      "path": "website/assets/logo.png",
+      "bytes": 6187,
+      "sha256": "9a36c528edfd2449264a46879ce4d6b72185fc574ac4ba7f389771b6a373e56d"
+    },
+    {
+      "path": "website/assets/preferences.js",
+      "bytes": 2903,
+      "sha256": "159bdfcdf51d6235f395a45acf21c1273a5795836e769b60c313537bee666a40"
+    },
+    {
+      "path": "website/assets/screenshots/appearance-light.png",
+      "bytes": 294669,
+      "sha256": "f7c474422749d9dfcfa44fb81253bf3734c5a8dd84675c00de6a61400b2bb4c9"
+    },
+    {
+      "path": "website/assets/screenshots/discord-return.png",
+      "bytes": 416034,
+      "sha256": "d0dbb4eea5098580a8a9245318fb943f0572e09120aa9752f79a62e5e5ce83b8"
+    },
+    {
+      "path": "website/assets/screenshots/donate-en.png",
+      "bytes": 105837,
+      "sha256": "f6db2feee028ed07a3506e35a088a587c078e693429cd3246c882bd2b8d15204"
+    },
+    {
+      "path": "website/assets/screenshots/donate-ru.png",
+      "bytes": 114626,
+      "sha256": "17cdf7f975563632b97f98a488174632276866400c99c8b476c2bbb16c2494b2"
+    },
+    {
+      "path": "website/assets/screenshots/english-overview.png",
+      "bytes": 292536,
+      "sha256": "ed4cd2cecc54a4045f0f0ff70fe29473e1811e3c3ef198acefd7db9b68f883b7"
+    },
+    {
+      "path": "website/assets/screenshots/fake-dark.png",
+      "bytes": 332936,
+      "sha256": "e4b1e0a269b0400f65c31e3546458dd0cd8d6329f0d56aaacb4db98cd7460aca"
+    },
+    {
+      "path": "website/assets/screenshots/journal-minimum.png",
+      "bytes": 225316,
+      "sha256": "0e28802e7fcae592b3ab3cff6ae22b9d50ed7cb811cff1711baeaf4aaba14fbd"
+    },
+    {
+      "path": "website/assets/screenshots/mini-overlay.png",
+      "bytes": 5222,
+      "sha256": "8f7fcda387a3f4ac40e557bb5dc33cee91ba9660fab67b67538ae9e895d3fe42"
+    },
+    {
+      "path": "website/assets/screenshots/options-en.png",
+      "bytes": 204756,
+      "sha256": "a2beb1ee05d8e1f8f824c5bf8ec8b2138d843f48793af00dfcfe003cb812ab8a"
+    },
+    {
+      "path": "website/assets/screenshots/options-ru.png",
+      "bytes": 214091,
+      "sha256": "c4af1af0a59a29bac80413f0d703ffe2492ea59f87138a86b4be30a282a6e798"
+    },
+    {
+      "path": "website/assets/screenshots/overview-dark.png",
+      "bytes": 298357,
+      "sha256": "f1db875025ee33199a612e49935b8af65c378559e5ada108d4d8bbfa4d912c46"
+    },
+    {
+      "path": "website/assets/screenshots/overview-en.png",
+      "bytes": 292766,
+      "sha256": "47c18ed33c23c9f3cf92307f098794a25cd4a1cf4c35841d56b29cb6ca4d68af"
+    },
+    {
+      "path": "website/assets/screenshots/overview-light.png",
+      "bytes": 297535,
+      "sha256": "8403bed14736a8de87c85a789bf6fd5d9f96c01dc5a83d6ff6f73c8b0ab34357"
+    },
+    {
+      "path": "website/assets/screenshots/overview-ru.png",
+      "bytes": 304028,
+      "sha256": "cdb05b2c749363eb4e5ee9a98ba86902f4ca4ded35f28c68c6d887d6d3f1325d"
+    },
+    {
+      "path": "website/assets/screenshots/profiles-light.png",
+      "bytes": 291067,
+      "sha256": "977f7fdf90e541d8a63dff6ec9768e92c1f4b720fefad1c44e2d0124ff363f50"
+    },
+    {
+      "path": "website/assets/screenshots/settings-minimum.png",
+      "bytes": 228300,
+      "sha256": "292608a13accee809147e13f3ad87b993e8cc0dd3bac8edeafd3928c7a73cc96"
+    },
+    {
+      "path": "website/assets/screenshots/stop-action.png",
+      "bytes": 4276,
+      "sha256": "b7d5b5ac8c0084e529038c28f0eeb967db12322d15ffa0fc606f06806c94c062"
+    },
+    {
+      "path": "website/assets/screenshots/streamer-en.png",
+      "bytes": 214331,
+      "sha256": "421c63e615826760b45c3e4937852fde904e66ecb62688d929bfcabd583e06b2"
+    },
+    {
+      "path": "website/assets/screenshots/streamer-ru.png",
+      "bytes": 231543,
+      "sha256": "1763602fb72fac6895e17daa18bba836135a50e0d7daa8dc00723728df69aaef"
+    },
+    {
+      "path": "website/assets/screenshots/telegram-dark.png",
+      "bytes": 309844,
+      "sha256": "133687b430cca805fea146560351440d5b9e7b3af0a386f09811aa508bcad04c"
+    },
+    {
+      "path": "website/assets/screenshots/telegram-light.png",
+      "bytes": 307664,
+      "sha256": "5618e5d35e2e9b1e1b4f37130407e611360240c5edc44f0b12013b73d26276bb"
+    },
+    {
+      "path": "website/assets/screenshots/updates-en.png",
+      "bytes": 297527,
+      "sha256": "b8112b7a810888bd3e53263d1afe6f2e83ac54c49d924f26b9e22cd164195c0a"
+    },
+    {
+      "path": "website/assets/screenshots/updates-ru.png",
+      "bytes": 306748,
+      "sha256": "462e1d0defbc58b345d33e5f2644eec5e286d28e716870ea7292502c32b57a25"
+    },
+    {
+      "path": "website/index.en.html",
+      "bytes": 47387,
+      "sha256": "57212ba55d3377912f68748a5faf8dee98e2d0c89e74db35e0a91d2ce67e0961"
+    },
+    {
+      "path": "website/index.html",
+      "bytes": 53048,
+      "sha256": "ae02cdec447ce58b19ae992a653ba6c7a28be9aa392fe61b4ee6f079e16d7390"
+    }
+  ]
+}

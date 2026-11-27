@@ -16,6 +16,17 @@ This does **not** relicense zapret, WinDivert, Cygwin, any upstream strategy or 
 - Inter 4.1: https://github.com/rsms/inter/releases/tag/v4.1
   SIL Open Font License under desktop/Z-Aura/assets/fonts/Inter-OFL.txt; static Regular/Medium/SemiBold/Bold TTFs embedded in the WPF EXE. Regular is also embedded in the native launcher's custom fatal-error UI.
 - LLVM-MinGW: https://github.com/mstorsjo/llvm-mingw (developer-only compiler, not shipped)
+- 0.3.3 optional engines: ByeDPI v0.17.3 (`hufrea/byedpi`), sing-box v1.14.4
+  (`SagerNet/sing-box`) and GoodbyeDPI 0.2.2 (`ValdikSS/GoodbyeDPI`). Unmodified
+  upstream binaries, exact tagged source ZIPs and shipped notices are retained in
+  `desktop/Z-Aura/assets/engines`; the embedded `engines.zip` carries runtime files,
+  matching source archives and provenance. These components are NOT relicensed under
+  Z-Aura's MIT license. Version/hash origins are in the vendor `manifest.json`.
+  ByeDPI/sing-box archive digests matched release metadata; GoodbyeDPI's digest is a
+  local integrity pin, not an upstream signature or independently published checksum.
+  sing-box's pinned sing-tun dependency embeds its Wintun DLL (see the exact
+  `040db71fcd33196f1d15708b91eb61e9dc6ab8dd` dependency source); no runtime Wintun download
+  has been added. GPL/dependency redistribution review remains a public-release gate.
 - Flowseal tg-ws-proxy 1.12.0: https://github.com/Flowseal/tg-ws-proxy, MIT.
   Vendored source and LICENSE under `upstream/telegram/source`; the EXE embeds source/LICENSE
   and the Python core. Integrated `config.py` disables remote CF-domain refresh; the Desktop

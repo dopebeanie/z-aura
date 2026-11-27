@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Z-Aura — a native interface for zapret</title>
+<meta name="description" content="Z-Aura 0.3.3: a WPF interface for zapret and other engines, Telegram Proxy, recovery, presets, Streamer Mode and Discord RPC. Not a VPN.">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="apple-touch-icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --accent:#7C3AED;
+  --accent-2:#A78BFA;
+  --accent-deep:#5B21B6;
+  --accent-soft:rgba(124,58,237,.12);
+  --accent-glow:rgba(124,58,237,.28);
+  --text:#241A3D;
+  --muted:#6B6085;
+  --glass:rgba(255,255,255,.55);
+  --glass-strong:rgba(255,255,255,.72);
+  --glass-modal:rgba(255,255,255,.88);
+  --stroke:rgba(255,255,255,.45);
+  --shadow:0 8px 32px rgba(124,58,237,.10);
+  --shadow-lg:0 24px 64px rgba(124,58,237,.16);
+  --scroll-thumb:rgba(124,58,237,.35);
+  --scroll-hover:rgba(124,58,237,.6);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --radius:24px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+::selection{background:var(--accent-glow);color:var(--accent-deep)}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--scroll-thumb) transparent}
+body{
+  font-family:'Manrope','Inter',-apple-system,'Segoe UI',sans-serif;
+  color:var(--text);
+  background:linear-gradient(160deg,#f5f3fa 0%,#ece7f8 38%,#e7dcf8 68%,#f1ebf9 100%);
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--scroll-thumb);border:2px solid transparent;background-clip:padding-box;border-radius:999px}
+::-webkit-scrollbar-thumb:hover{background-color:var(--scroll-hover)}
+::-webkit-scrollbar-corner{background:transparent}
+::-webkit-scrollbar-button{display:none;width:0;height:0}
+@supports selector(::-webkit-scrollbar){html{scrollbar-width:auto;scrollbar-color:auto}}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px;box-shadow:0 0 0 6px var(--accent-glow)}
+
+/* ---------- Фон: анимированные блобы ---------- */
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
+.blob-1{width:520px;height:520px;background:radial-gradient(circle,#c4b0f5,transparent 70%);top:-140px;left:-120px;animation:float1 22s ease-in-out infinite alternate}
+.blob-2{width:640px;height:640px;background:radial-gradient(circle,#d9c8fa,transparent 70%);top:30%;right:-220px;animation:float2 26s ease-in-out infinite alternate}
+.blob-3{width:460px;height:460px;background:radial-gradient(circle,#b9a4f2,transparent 70%);bottom:-160px;left:24%;animation:float1 30s ease-in-out infinite alternate-reverse}
+@keyframes float1{from{transform:translate(0,0) scale(1)}to{transform:translate(70px,50px) scale(1.12)}}
+@keyframes float2{from{transform:translate(0,0) scale(1)}to{transform:translate(-80px,60px) scale(1.08)}}
+
+/* ---------- Общие ---------- */
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.glass{
+  background:var(--glass);
+  -webkit-backdrop-filter:blur(24px);
+  backdrop-filter:blur(24px);
+  border:1px solid var(--stroke);
+  box-shadow:var(--shadow);
+}
+section{padding:96px 0;position:relative}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--accent-deep);background:var(--accent-soft);
+  border:1px solid rgba(124,58,237,.18);border-radius:999px;padding:7px 16px;
+}
+h2{font-size:clamp(30px,4vw,44px);font-weight:800;letter-spacing:-.02em;line-height:1.12}
+.section-head{max-width:640px;margin-bottom:48px}
+.section-head p{margin-top:14px;font-size:17px;line-height:1.65;color:var(--muted)}
+.icon{width:22px;height:22px;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;fill:none;flex:none}
+
+/* ---------- Кнопки ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 28px;border-radius:14px;border:none;cursor:pointer;
+  font-family:inherit;font-size:15.5px;font-weight:600;text-decoration:none;
+  transition:transform .45s var(--spring),box-shadow .45s var(--ease),filter .3s;
+  will-change:transform;
+}
+.btn:hover{transform:scale(1.02)}
+.btn:active{transform:scale(.98)}
+.btn-primary{
+  color:#fff;background:linear-gradient(135deg,#8B5CF6,#7C3AED);
+  box-shadow:0 8px 24px var(--accent-glow),inset 0 1px 0 rgba(255,255,255,.35);
+}
+.btn-primary:hover{box-shadow:0 12px 36px rgba(124,58,237,.42),inset 0 1px 0 rgba(255,255,255,.35)}
+.btn-glass{
+  color:var(--text);background:var(--glass);border:1px solid var(--stroke);
+  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:var(--shadow);
+}
+.btn-glass:hover{background:rgba(255,255,255,.72)}
+
+/* ---------- Навигация ---------- */
+.nav-outer{position:fixed;top:14px;left:0;right:0;z-index:100;padding:0 20px}
+.nav{max-width:1240px;margin:0 auto;border-radius:18px;padding:10px 12px 10px 20px;display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;align-items:center;gap:12px}
+.logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:18px;letter-spacing:-.01em;text-decoration:none;color:var(--text);white-space:nowrap;flex-shrink:0}
+.logo-mark{display:block;width:36px;height:36px;object-fit:contain;flex:none;filter:drop-shadow(0 4px 8px var(--accent-glow))}
+.nav-links{display:flex;align-items:center;justify-content:center;gap:2px;min-width:0}
+.nav-links a{
+  text-decoration:none;color:var(--muted);font-size:14px;font-weight:600;white-space:nowrap;line-height:1.4;
+  padding:11px 12px;border-radius:11px;transition:color .25s var(--ease),background .25s var(--ease);
+}
+.nav-links a:hover{color:var(--accent-deep);background:rgba(124,58,237,.09)}
+.nav-links a.active{color:var(--accent-deep);background:rgba(124,58,237,.13);box-shadow:inset 0 0 0 1px rgba(124,58,237,.16)}
+.btn-nav{padding:11px 18px;font-size:14px;border-radius:12px;justify-content:center;white-space:nowrap;min-height:44px}
+@media(max-width:1180px){
+  .nav{grid-template-columns:minmax(0,1fr) auto auto}
+  .nav-links{grid-column:1/-1;grid-row:2;flex-wrap:wrap;border-top:1px solid var(--stroke);padding-top:8px}
+  .hero{padding-top:220px}
+}
+
+/* ---------- Hero ---------- */
+.hero{padding:190px 0 100px;text-align:center}
+.hero h1{
+  font-size:clamp(38px,6vw,68px);font-weight:800;letter-spacing:-.03em;line-height:1.06;
+  margin:26px auto 22px;max-width:860px;
+}
+.hero h1 .grad{
+  background:linear-gradient(120deg,#7C3AED 10%,#A78BFA 55%,#6D28D9 90%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero .lead{font-size:clamp(16px,2vw,19px);line-height:1.7;color:var(--muted);max-width:640px;margin:0 auto}
+.hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:38px}
+.hero-note{display:inline-flex;align-items:center;gap:9px;margin-top:26px;font-size:13.5px;color:var(--muted);
+  background:rgba(255,255,255,.5);border:1px solid var(--stroke);border-radius:999px;padding:9px 18px;
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.hero-note b{color:var(--accent-deep)}
+
+/* Статусная карточка в hero */
+.hero-status{
+  margin:64px auto 0;max-width:680px;border-radius:var(--radius);padding:26px 30px;
+  text-align:left;display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;
+}
+.status-dot{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#8B5CF6,#6D28D9);display:grid;place-items:center;position:relative}
+.status-dot .icon{width:20px;height:20px;stroke:#fff}
+.status-dot::before{content:"";position:absolute;inset:-7px;border-radius:50%;border:2px solid var(--accent);animation:pulse 2s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.85);opacity:.55}75%{transform:scale(1.45);opacity:0}100%{transform:scale(1.45);opacity:0}}
+.hero-status .st-title{font-weight:700;font-size:16px}
+.hero-status .st-sub{font-size:13.5px;color:var(--muted);margin-top:3px}
+.mini-pill{font-size:12.5px;font-weight:700;color:var(--accent-deep);background:var(--accent-soft);border-radius:999px;padding:7px 14px;white-space:nowrap}
+
+/* ---------- Карточки возможностей ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,310px),1fr));gap:20px}
+.card{border-radius:var(--radius);padding:28px;transition:transform .5s var(--spring),box-shadow .5s var(--ease)}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.card .ico{width:46px;height:46px;border-radius:14px;background:var(--accent-soft);display:grid;place-items:center;color:var(--accent);margin-bottom:18px;transition:transform .5s var(--spring)}
+.card:hover .ico{transform:scale(1.1) rotate(-4deg)}
+.card h3{font-size:18px;font-weight:700;margin-bottom:9px;letter-spacing:-.01em}
+.card p{font-size:14.5px;line-height:1.65;color:var(--muted)}
+.card .tag{display:inline-block;margin-top:14px;font-size:12px;font-weight:700;color:var(--accent-deep);background:var(--accent-soft);padding:5px 11px;border-radius:999px}
+
+/* ---------- Шаги ---------- */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px}
+.step{border-radius:var(--radius);padding:32px 28px;position:relative;overflow:hidden}
+.step .num{
+  font-size:64px;font-weight:800;line-height:1;letter-spacing:-.04em;
+  background:linear-gradient(135deg,rgba(124,58,237,.22),rgba(124,58,237,.06));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.step h3{font-size:18px;font-weight:700;margin:16px 0 9px}
+.step p{font-size:14.5px;line-height:1.65;color:var(--muted)}
+.step .code{font-size:12.5px;background:rgba(124,58,237,.10);color:var(--accent-deep);border-radius:8px;padding:2px 8px;font-family:'JetBrains Mono',Consolas,monospace}
+
+/* ---------- Мокап интерфейса ---------- */
+.app-window{border-radius:22px;overflow:hidden;box-shadow:var(--shadow-lg)}
+.win-titlebar{display:flex;align-items:center;gap:8px;padding:13px 18px;background:var(--glass-strong);border-bottom:1px solid var(--stroke)}
+.win-btn{width:12px;height:12px;border-radius:50%;border:none;cursor:pointer;transition:transform .4s var(--spring)}
+.win-btn:hover{transform:scale(1.25)}
+.win-btn-1{background:linear-gradient(135deg,#A78BFA,#7C3AED)}
+.win-btn-2{background:rgba(124,58,237,.45)}
+.win-btn-3{background:rgba(124,58,237,.25)}
+.win-title{margin-left:10px;font-size:12.5px;font-weight:600;color:var(--muted)}
+.win-body{display:grid;grid-template-columns:200px minmax(0,1fr);min-height:380px}
+.win-side{padding:18px 12px;border-right:1px solid var(--stroke);background:rgba(255,255,255,.35);display:flex;flex-direction:column;gap:4px}
+.win-nav{display:flex;align-items:center;gap:11px;padding:10px 13px;border-radius:11px;font-size:13.5px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .35s var(--ease)}
+.win-nav .icon{width:17px;height:17px}
+.win-nav:hover{color:var(--accent-deep);background:rgba(124,58,237,.08)}
+.win-nav.active{color:var(--accent-deep);background:rgba(124,58,237,.14);box-shadow:inset 0 0 0 1px rgba(124,58,237,.18)}
+.win-main{padding:24px;display:flex;flex-direction:column;gap:16px}
+.win-card{border-radius:16px;background:rgba(255,255,255,.55);border:1px solid var(--stroke);padding:18px 20px}
+.win-card .row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.win-card .lab{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.win-card .val{font-size:15px;font-weight:700;margin-top:5px}
+.win-run{
+  margin-top:auto;display:flex;align-items:center;justify-content:center;gap:11px;
+  padding:17px;border-radius:14px;border:none;cursor:pointer;
+  font-family:inherit;font-size:15px;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,#8B5CF6,#7C3AED);
+  box-shadow:0 8px 24px var(--accent-glow);position:relative;
+  transition:transform .45s var(--spring);
+}
+.win-run:hover{transform:scale(1.02)}
+.win-run:active{transform:scale(.98)}
+.win-run::after{content:"";position:absolute;inset:-6px;border-radius:18px;border:2px solid var(--accent);opacity:0;animation:pulse 2.2s ease-out infinite}
+.win-run .icon{width:18px;height:18px;stroke:#fff;stroke-width:2.2;fill:#fff;stroke:none}
+.win-log{font-family:Consolas,'JetBrains Mono',monospace;font-size:11.5px;line-height:1.9;color:var(--muted)}
+.win-log b{color:var(--accent-deep);font-weight:700}
+.ui-features{margin-top:36px;display:flex;flex-wrap:wrap;gap:12px}
+.chip{display:inline-flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;color:var(--text);
+  background:var(--glass);border:1px solid var(--stroke);border-radius:999px;padding:10px 18px;
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:var(--shadow);transition:transform .45s var(--spring)}
+.chip:hover{transform:translateY(-3px)}
+.chip .icon{width:16px;height:16px;color:var(--accent)}
+
+/* ---------- Приватность ---------- */
+.priv{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.priv .card{display:flex;gap:18px;align-items:flex-start;padding:24px}
+.priv .ico{margin-bottom:0;flex:none}
+.priv h3{font-size:16px}
+.priv p{font-size:13.5px}
+.priv .path{font-size:12.5px;background:rgba(124,58,237,.10);color:var(--accent-deep);border-radius:8px;padding:2px 8px;font-family:Consolas,monospace}
+
+/* ---------- Download ---------- */
+.dl{border-radius:32px;padding:clamp(40px,6vw,72px);text-align:center;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,rgba(255,255,255,.65),rgba(237,229,252,.75));box-shadow:var(--shadow-lg)}
+.dl::before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;filter:blur(80px);
+  background:radial-gradient(circle,rgba(167,139,250,.55),transparent 70%);top:-180px;right:-120px;pointer-events:none}
+.dl h2{position:relative}
+.dl .lead{position:relative;max-width:560px;margin:16px auto 0;font-size:16.5px;line-height:1.7;color:var(--muted)}
+.dl-cta{position:relative;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.dl-meta{position:relative;display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:30px;font-size:13.5px;color:var(--muted)}
+.dl-meta span{display:inline-flex;align-items:center;gap:8px}
+.dl-meta .icon{width:16px;height:16px;color:var(--accent)}
+
+/* ---------- Footer ---------- */
+footer{padding:56px 0 44px;border-top:1px solid rgba(124,58,237,.14)}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.foot-links{display:flex;gap:26px;flex-wrap:wrap}
+.foot-links a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:600;transition:color .3s}
+.foot-links a:hover{color:var(--accent-deep)}
+.a11y{display:flex;align-items:center;gap:12px;font-size:13.5px;font-weight:600;color:var(--muted)}
+.switch{width:46px;height:26px;border-radius:13px;border:none;cursor:pointer;background:#d9d2e6;position:relative;transition:background .4s var(--ease);flex:none}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(36,26,61,.2);transition:transform .45s var(--spring)}
+.switch[aria-checked="true"]{background:var(--accent)}
+.switch[aria-checked="true"]::after{transform:translateX(20px)}
+.copy{font-size:12.5px;color:var(--muted);margin-top:22px}
+/* ---------- Support: an optional gift, never a paywall ---------- */
+.donate-panel{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;border-radius:32px;padding:clamp(28px,5vw,56px);overflow:hidden;background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(227,214,251,.7))}
+.donate-panel p{font-size:15px;line-height:1.75;color:var(--muted);margin-top:16px}
+.donate-card{position:relative;padding:28px;border-radius:24px;background:linear-gradient(135deg,#352044,#5b3290);color:#fff;box-shadow:0 20px 50px rgba(77,36,133,.2);overflow:hidden}
+.donate-card::before{content:"";position:absolute;width:240px;height:240px;right:-85px;top:-100px;border:1px solid rgba(216,192,255,.18);border-radius:50%;box-shadow:0 0 0 24px rgba(216,192,255,.04),0 0 0 55px rgba(216,192,255,.03);pointer-events:none}
+.donate-card .bank{font-size:13px;letter-spacing:.06em;color:#ddccf5;position:relative}
+.donate-card .card-number{display:block;position:relative;margin:28px 0 26px;font-size:clamp(18px,2.3vw,28px);letter-spacing:.08em;font-weight:700;white-space:nowrap;user-select:all}
+.donate-card .btn{position:relative;font-size:13px;padding:11px 16px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff}
+.donate-status{min-height:24px;font-size:12px!important;color:var(--accent-deep)!important}
+@media(max-width:800px){.donate-panel{grid-template-columns:1fr;gap:24px}.donate-card .card-number{font-size:clamp(17px,4.5vw,27px)}}
+
+/* ---------- Reveal-анимации ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--spring)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ---------- Reduced motion ---------- */
+html.reduce-motion{scroll-behavior:auto}
+html.reduce-motion .blob,html.reduce-motion .status-dot::before,html.reduce-motion .win-run::after{animation:none}
+html.reduce-motion .reveal{transition:opacity .1s linear;transform:none}
+html.reduce-motion .btn,html.reduce-motion .card,html.reduce-motion .chip,html.reduce-motion .switch::after{transition-duration:.1s}
+
+@media (max-width:900px){
+  .win-body{grid-template-columns:minmax(0,1fr)}
+  .win-side{flex-direction:row;overflow-x:auto;border-right:none;border-bottom:1px solid var(--stroke)}
+  .win-nav{white-space:nowrap}
+  section{padding:72px 0}
+}
+@media (max-width:640px){
+  .nav-outer{padding:0 12px;top:10px}
+  .nav{grid-template-columns:minmax(0,1fr) auto;padding:12px;gap:8px}
+  .nav-links{gap:2px}
+  .nav-links a{font-size:12px;padding:8px 9px}
+  .nav .btn-nav{grid-column:1/-1;grid-row:3}
+  .win-main{min-width:0;padding:16px}
+  .win-card .row{flex-wrap:wrap}
+  .win-card .mini-pill{max-width:100%;white-space:normal}
+  .win-log{overflow-wrap:anywhere}
+  .hero{padding:260px 0 72px}
+  .hero-status{grid-template-columns:auto 1fr;padding:20px}
+  .hero-status .mini-pill{display:none}
+}
+html[data-theme="dark"]{color-scheme:dark;--text:#f3ecff;--muted:#c4b9d3;--accent:#b997ff;--accent-deep:#d0b3ff;--accent-soft:rgba(180,135,255,.16);--glass:rgba(40,33,49,.82);--glass-strong:rgba(48,39,59,.95);--glass-modal:#30273b;--stroke:rgba(205,176,239,.24);--shadow:0 8px 32px #0003;--shadow-lg:0 24px 64px #0005}
+html[data-theme="dark"] body{background:linear-gradient(160deg,#1c1825,#281e36 55%,#241b30)}
+html[data-theme="dark"] .hero h1 .grad{background-image:linear-gradient(120deg,#b997ff,#dfcaff,#c5a2ff)}
+html[data-theme="dark"] .hero-note,html[data-theme="dark"] .win-side,html[data-theme="dark"] .win-card{background:var(--glass)}
+html[data-theme="dark"] .dl,html[data-theme="dark"] .donate-panel{background:linear-gradient(135deg,#30273b,#3d2b50)}
+html[data-theme="dark"] .btn-glass:hover{background:var(--glass-strong)}
+html[data-theme="dark"]{--scroll-thumb:rgba(200,168,255,.4);--scroll-hover:rgba(200,168,255,.7)}
+.site-preferences{display:flex;align-items:center;gap:8px;justify-self:end}
+.site-preferences [data-language-link]{display:grid;place-items:center;min-width:44px;min-height:44px;padding:8px;font-family:inherit;font-size:12px;font-weight:700;line-height:1;color:var(--muted);background:var(--glass-strong);border:1px solid var(--stroke);border-radius:12px;text-decoration:none;transition:background .2s,color .2s}
+.site-preferences [data-language-link]:hover{color:var(--accent-deep);background:var(--accent-soft)}
+.theme-picker{display:flex;gap:2px;padding:3px;border:1px solid var(--stroke);border-radius:13px;background:var(--glass-strong)}
+.theme-picker button{appearance:none;position:relative;display:grid;place-items:center;width:36px;height:36px;padding:0;border:1px solid transparent;border-radius:9px;background:transparent;color:var(--muted);cursor:pointer;transition:background .2s,color .2s,box-shadow .2s}
+.theme-picker .icon{width:18px;height:18px;pointer-events:none}
+.theme-picker button::after{content:attr(aria-label);position:absolute;top:calc(100% + 10px);right:0;z-index:5;width:max-content;padding:8px 10px;border:1px solid var(--stroke);border-radius:10px;background:var(--glass-modal);color:var(--text);box-shadow:var(--shadow);font:600 12px/1.4 'Manrope',sans-serif;opacity:0;visibility:hidden;pointer-events:none}
+.theme-picker button:not(:disabled):hover::after,.theme-picker button:focus-visible::after{opacity:1;visibility:visible}
+.theme-picker button:hover{color:var(--accent-deep);background:var(--accent-soft)}
+.theme-picker button[aria-checked="true"]{color:var(--accent-deep);background:var(--accent-soft);border-color:var(--accent-glow);box-shadow:0 2px 8px var(--accent-glow)}
+.theme-picker button:disabled{cursor:default;opacity:.55}
+html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{transition:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.blob,.status-dot::before,.win-run::after{animation:none}.reveal{opacity:1;transform:none;transition:none}.theme-picker button,.site-preferences a,.nav-links a{transition:none}}
+@media(prefers-reduced-transparency:reduce){.glass,.btn-glass,.chip{background:var(--glass-modal);backdrop-filter:none}}
+@media(forced-colors:active){html{scrollbar-color:auto}body,.glass,.dl,.donate-panel,.win-card{background:Canvas;color:CanvasText;box-shadow:none}.hero h1 .grad{background:none;-webkit-text-fill-color:CanvasText}.btn,.site-preferences a,.theme-picker{border:1px solid ButtonText}.theme-picker button{color:ButtonText;box-shadow:none}.theme-picker button[aria-checked="true"]{border:2px solid Highlight;color:Highlight}}
+.screenshot{padding:14px;margin:0 0 24px;border-radius:24px;overflow:hidden}.screenshot img{display:block;width:100%;height:auto;border-radius:14px}.screenshot figcaption{padding:14px 8px 2px;color:var(--muted);line-height:1.5}.release-evidence{margin-top:28px;color:var(--muted);line-height:1.75;overflow-wrap:anywhere}@media(max-width:600px){.screenshot{padding:7px;border-radius:16px}.screenshot img{border-radius:10px}.hero-status{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<!-- ================= НАВИГАЦИЯ ================= -->
+<div class="nav-outer">
+  <nav class="nav glass" aria-label="Main navigation">
+    <a class="logo" href="#top" aria-label="Z-Aura — home">
+      <img class="logo-mark" src="assets/logo.png" alt="" width="36" height="36">
+      Z-Aura
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#interface">Interface</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#donate">Donate</a>
+      <a href="https://t.me/zaurafork" target="_blank" rel="noopener noreferrer">Telegram</a>
+    </div>
+    <div class="site-preferences" aria-label="Language and appearance">
+      <a href="index.html" lang="ru" data-language-link>RU</a>
+      <div class="theme-picker" data-theme-picker role="radiogroup" aria-label="Site theme">
+        <button type="button" role="radio" data-theme-choice="light" aria-checked="true" aria-label="Light theme" tabindex="0" disabled>
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+        </button>
+        <button type="button" role="radio" data-theme-choice="dark" aria-checked="false" aria-label="Dark theme" tabindex="-1" disabled>
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg>
+        </button>
+      </div>
+    </div>
+    <a class="btn btn-primary btn-nav" href="https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe" title="Download Z-Aura.exe">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
+      Download
+    </a>
+  </nav>
+</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow reveal">
+      <svg class="icon" style="width:15px;height:15px" viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m6.08 9.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/></svg>
+      Z-Aura 0.3.3 · test candidate
+    </span>
+    <h1 class="reveal">Full control over <span class="grad">zapret</span> — without a single batch script</h1>
+    <p class="lead reveal">A native .NET 10 / WPF Windows interface for zapret/winws, ByeDPI, sing-box + ByeDPI and GoodbyeDPI. All 22 original winws strategies remain. Dependencies are bundled in one EXE.</p>
+    <div class="hero-cta reveal">
+      <a class="btn btn-primary" href="https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe" title="Download Z-Aura.exe">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
+        Download
+      </a>
+      <a class="btn btn-glass" href="#how">How it works</a>
+      <a class="btn btn-glass" href="https://t.me/zaurafork" target="_blank" rel="noopener noreferrer">Telegram · @zaurafork</a>
+    </div>
+    <div class="reveal">
+      <span class="hero-note">
+        <svg class="icon" style="width:16px;height:16px;color:var(--accent)" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
+        This is <b>not a VPN</b>: no IP hiding or added encryption — DPI handling only
+      </span>
+    </div>
+
+    <div class="hero-status glass reveal" role="status">
+      <span class="status-dot" aria-hidden="true">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+      </span>
+      <div>
+        <div class="st-title">Local corrected build · 0.3.3</div>
+        <div class="st-sub">Control Panel · Streamer Mode · sounds and RPC</div>
+      </div>
+      <span class="mini-pill">0.3.3 · candidate</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ВОЗМОЖНОСТИ ================= -->
+<section id="update"><div class="wrap"><div class="section-head reveal"><span class="eyebrow">0.3.3</span><h2 style="margin-top:18px">New in 0.3.3</h2><p>A corrected local revision. GitHub links point to published releases and do not imply that this build has been published.</p></div><div class="grid"><article class="card glass reveal"><h3>Control Panel</h3><p>Choose an engine, inspect conflicts and route selected EXEs over TCP with sing-box and an owned local ByeDPI bridge. VPN and antivirus software are never automatically disabled.</p></article>
+<article class="card glass reveal"><h3>Recovery and presets</h3><p>Snapshots precede owned hosts, DNS and service changes. Scoped rollback checks subsequent changes first. Network presets retain your selected mode. This is not a Windows system image.</p></article>
+<article class="card glass reveal"><h3>Streamer Mode</h3><p>A stable label and state switch hide Discord identity, paths, logs and personalized RPC information. The mode does not provide network anonymity.</p></article>
+<article class="card glass reveal"><h3>Sounds and visible RPC</h3><p>Options includes a sound toggle, volume and preview. Adapter rates and local achievements are opt-in, with a visible activity preview. The Telegram button stays.</p></article>
+<article class="card glass reveal"><h3>Strategy Finder</h3><p>A cancellable comparison of five strategies using HTTPS checks and an engine-off baseline. Results do not guarantee video, calls or connectivity on your ISP.</p></article>
+<article class="card glass reveal"><h3>Interface refinements</h3><p>Original PNG branding, aligned sidebar actions, working Options scrolling and compact hold progress. Repeated profile startup no longer runs a full conflict inspection.</p></article></div><p class="release-evidence">Verified locally: 2051 backend assertions, 358 GUI PASS records and 80/80 Node tests. Real TUN/WinDivert operations, sound-device output and display in a live Discord client are not claimed as verified.</p></div></section>
+<section id="features">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Features</span>
+      <h2 style="margin-top:18px">What used to take a script now takes a click</h2>
+      <p>Control Panel brings together engines, recovery, presets, diagnostics and options. Process selection is supported only by sing-box + ByeDPI for TCP; UDP, QUIC and voice remain direct.</p>
+    </div>
+    <div class="grid">
+      <div class="card glass reveal">
+        <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3v13m-5-5 5 5 5-5M4 16v5h16v-5"/></svg></span>
+        <h3>Updates for Z-Aura itself</h3>
+        <p>Stable GitHub version checks, optional automatic downloads and SHA-256 verification. Installation requires restart confirmation and retains a backup EXE. The Flowseal runtime is not updated.</p>
+        <span class="tag">0.3.3 · test candidate</span>
+      </div>
+      <div class="card glass reveal">
+        <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="m3 11 18-8-4 18-6-6-4 3 1-5Z"/></svg></span>
+        <h3>Telegram Proxy included</h3>
+        <p>Independent On/Off, restart, configuration, port, uptime and logs. Python and dependencies are bundled. On confirms the local listener, not a guaranteed Telegram connection.</p>
+        <span class="tag">new · test candidate</span>
+      </div>
+      <div class="card glass reveal">
+        <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg></span>
+        <h3>Discord RPC</h3>
+        <p>Options includes a sound toggle, volume and preview. Adapter rates and local achievements are opt-in, with a visible activity preview. The Telegram button stays.</p>
+      </div>
+      <div class="card glass reveal">
+        <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="M4 21v-7"/><path d="M4 10V3"/><path d="M12 21v-9"/><path d="M12 8V3"/><path d="M20 21v-5"/><path d="M20 12V3"/><path d="M1 14h6"/><path d="M9 8h6"/><path d="M17 16h6"/></svg></span>
+        <h3>22 bundled strategies</h3>
+        <p>Ready-to-use DPI presets. No manual argument editing: choose a strategy from the list.</p>
+        <span class="tag">out of the box</span>
+      </div>
+      <div class="card glass reveal">
+        <span class="ico"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></span>
+        <h3>Custom profiles</h3>
+        <p>Create your own configurations, bind strategies and lists, save them and switch easily.</p>
+      </div>
+      <div class="card glass reveal">
+        <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg></span>
+        <h3>List editor</h3>
+        <p>Domain and IP lists with import and export. Bind each list to a specific strategy block.</p>
+      </div>
+      <div class="card glass reveal">
+        <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m6.08 9.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/><path d="m6.08 15.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/></svg></span>
+        <h3>Fake-payload library</h3>
+        <p>All fake files in one place. Choose a payload and bind it to a strategy without juggling files.</p>
+      </div>
+      <div class="card glass reveal">
+        <span class="ico"><svg class="icon" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4"/><path d="M14 12h.01"/><path d="M17.5 12h.01"/></svg></span>
+        <h3>Game traffic filters</h3>
+        <p>Winws profiles support traffic filters. EXE selection is a separate sing-box + ByeDPI feature for TCP; UDP/QUIC and voice remain direct.</p>
+      </div>
+      <div class="card glass reveal">
+        <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="m4 17 6-6-6-6"/><path d="M12 19h8"/></svg></span>
+        <h3>Logs and diagnostics</h3>
+        <p>Live engine logs and manual HTTPS checks help you assess connectivity on your network.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= КАК РАБОТАЕТ ================= -->
+<section id="how">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2 style="margin-top:18px">Three steps to start</h2>
+      <p>Z-Aura does not rewrite the packet engine. It compiles arguments and directly starts bundled winws.</p>
+    </div>
+    <div class="steps">
+      <div class="step glass reveal">
+        <div class="num">01</div>
+        <h3>Download one EXE</h3>
+        <p>The engine, WinDivert driver, lists, presets and fonts are bundled. No installed .NET, WebView2 or NSSM is needed.</p>
+      </div>
+      <div class="step glass reveal">
+        <div class="num">02</div>
+        <h3>Choose an engine and profile</h3>
+        <p>The 22 original strategies apply to winws. They are not automatically translated to ByeDPI or GoodbyeDPI. Use sing-box + ByeDPI for EXE selection (TCP only).</p>
+      </div>
+      <div class="step glass reveal">
+        <div class="num">03</div>
+        <h3>Click Start</h3>
+        <p>Z-Aura compiles arguments and starts the engine. Install a service directly from the interface for background operation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ИНТЕРФЕЙС ================= -->
+<section id="interface">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Interface</span>
+      <h2 style="margin-top:18px">The actual 0.3.3 interface</h2>
+      <p>Screenshots from isolated GUI checks. RPC values shown here are test fixture data.</p>
+    </div>
+
+<figure class="glass reveal screenshot"><img src="assets/screenshots/overview-en.png" alt="Overview · dark theme" loading="lazy" width="1320" height="890"><figcaption>Overview · dark theme</figcaption></figure>
+<figure class="glass reveal screenshot"><img src="assets/screenshots/options-en.png" alt="Options · sounds and RPC preview" loading="lazy" width="980" height="800"><figcaption>Options · sounds and RPC preview</figcaption></figure>
+<figure class="glass reveal screenshot"><img src="assets/screenshots/streamer-en.png" alt="Streamer Mode · minimum width" loading="lazy" width="1040" height="700"><figcaption>Streamer Mode · minimum width</figcaption></figure>
+    <div class="ui-features">
+      <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="19" cy="13" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="10" cy="19" r="2.5"/></svg>Light and dark themes</span>
+      <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="M3 10h18"/></svg>Ctrl+K — quick actions</span>
+      <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/><path d="M14 9h.01"/><path d="M10 9h.01"/></svg>Toast notifications with Undo</span>
+      <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a7 7 0 1 0 10 10"/><path d="M12 8v4l3 3"/></svg>Smooth animations</span>
+      <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="3"/><path d="M16 3l-4 4-4-4"/></svg>High contrast</span>
+      <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><path d="M5 8V4h14v4"/><path d="M2 8h20"/><path d="M12 8v12"/><path d="M8 20h8"/></svg>Reduced Motion / Transparency</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ПРИВАТНОСТЬ ================= -->
+<section id="privacy">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Privacy</span>
+      <h2 style="margin-top:18px">Your settings stay on your device</h2>
+      <p>No Z-Aura accounts or automatic profile/log uploads to the developer. Presence and voluntary OAuth contact Discord; Proxy contacts Telegram and selected relays. Version checks contact GitHub, including normal connection data and IP, and can be disabled. External links open on click.</p>
+    </div>
+    <div class="priv">
+      <div class="card glass reveal">
+        <span class="ico"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg></span>
+        <div>
+          <h3>No mandatory account</h3>
+          <p>All features work without sign-in. Discord OAuth requests only identify. The session is saved using Windows DPAPI for the current user; signing out deletes it. Account details are not sent to Presence.</p>
+        </div>
+      </div>
+      <div class="card glass reveal">
+        <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/><path d="M12 15v-9"/><path d="m8.5 9.5 3.5-3.5 3.5 3.5"/></svg></span>
+        <div>
+          <h3>Local data</h3>
+          <p>Profiles, lists, logs and cache reside in <span class="path">%APPDATA%\Z-Aura</span> or beside the EXE in <span class="path">data</span> when using <span class="path">portable.flag</span>.</p>
+        </div>
+      </div>
+      <div class="card glass reveal">
+        <span class="ico"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <div>
+          <h3>Verifiable build</h3>
+          <p>Resources are checked against SHA-256 at each startup, and the driver signature is verified before launch.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= СКАЧАТЬ ================= -->
+<section id="download">
+  <div class="wrap">
+    <div class="dl reveal">
+      <h2>One EXE. Dependencies included.</h2>
+      <p class="lead">Windows 10/11 x64; administrator privileges required. The button downloads Z-Aura.exe from the latest published GitHub Release. Its version may differ from the local 0.3.3 revision described here. Preserve your previous EXE and data before upgrading.</p>
+      <div class="dl-cta">
+        <a class="btn btn-primary" href="https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe" id="dl-link" title="Download Z-Aura.exe">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
+          Download
+        </a>
+        <a class="btn btn-glass" href="https://github.com/dopebeanie/Z-Aura#readme" id="docs-link">Documentation</a>
+        <a class="btn btn-glass" href="https://t.me/zaurafork" target="_blank" rel="noopener noreferrer">Telegram news</a>
+      </div>
+      <p class="release-evidence">A corrected local revision. GitHub links point to published releases and do not imply that this build has been published.</p><div class="dl-meta">
+        <span><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="m9 12 2 2 4-4"/></svg>Windows 10/11 · x64</span>
+        <span><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="m9 12 2 2 4-4"/></svg>No dependency installation</span>
+        <span><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="m9 12 2 2 4-4"/></svg>SHA-256 in release notes</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<section id="donate">
+  <div class="wrap">
+    <div class="donate-panel glass reveal">
+      <div>
+        <span class="eyebrow">Donate</span>
+        <h2 style="margin-top:20px">A small contribution.<br>More room for ideas.</h2>
+        <p>If Z-Aura helps you, support its development with an optional transfer. All features stay free; a donation unlocks nothing.</p>
+        <p style="font-size:12px">Transfer in your banking app. Verify the details and recipient first. This site does not accept payments or request CVV, PIN or SMS codes.</p>
+      </div>
+      <div>
+        <div class="donate-card">
+          <span class="bank">SberBank · support Z-Aura</span>
+          <span class="card-number" id="donation-number">2202 2085 9236 5168</span>
+          <button type="button" class="btn" id="copy-donation"><svg class="icon" viewBox="0 0 24 24"><path d="M8 8h12v13H8zM16 8V3H3v13h5"/></svg>Copy card number</button>
+        </div>
+        <p class="donate-status" id="donation-status" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a class="logo" href="#top">
+        <img class="logo-mark" src="assets/logo.png" alt="" width="36" height="36" loading="lazy">
+        Z-Aura
+      </a>
+      <nav class="foot-links" aria-label="More links">
+        <a href="https://github.com/dopebeanie/Z-Aura" id="gh-link">GitHub</a>
+        <a href="https://github.com/dopebeanie/Z-Aura/releases" id="rel-link">Releases</a>
+        <a href="https://github.com/dopebeanie/Z-Aura/releases" id="changelog-link">Changelog</a>
+        <a href="#donate">Donate</a>
+        <a href="https://t.me/zaurafork" target="_blank" rel="noopener noreferrer">Telegram · @zaurafork</a>
+        <a href="https://github.com/Flowseal/zapret-discord-youtube" rel="noopener">Upstream</a>
+        <a href="https://dopebeanie.github.io/z-aura-confidentiality-policy/privacy.html" rel="noreferrer">Privacy policy</a>
+      </nav>
+      <div class="a11y">
+        <svg class="icon" style="width:17px;height:17px;color:var(--accent)" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        Reduce motion
+        <button class="switch" id="motion-switch" role="switch" aria-checked="false" aria-label="Reduce motion"></button>
+      </div>
+    </div>
+    <p class="copy">© 2026 Z-Aura. Independent interface; the zapret-discord-youtube packet engine belongs to its authors.</p>
+    <p class="copy">Your theme choice is stored only in this site's localStorage. No analytics added. An external font loads from Google Fonts; hosting and external sites receive normal connection data.</p>
+  </div>
+</footer>
+
+<script src="assets/preferences.js"></script>
+<script>
+(function(){
+  var copyDonation = document.getElementById('copy-donation');
+  copyDonation.addEventListener('click', async function(){
+    var status = document.getElementById('donation-status');
+    try {
+      await navigator.clipboard.writeText(document.getElementById('donation-number').textContent.trim());
+      status.textContent = document.documentElement.lang === 'en' ? 'Card number copied. Verify the recipient in your banking app.' : 'Номер карты скопирован. Проверьте получателя в банковском приложении.';
+    } catch (_) {
+      var range = document.createRange(); range.selectNodeContents(document.getElementById('donation-number'));
+      var selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range);
+      status.textContent = document.documentElement.lang === 'en' ? 'Number selected. Copy it manually.' : 'Номер выделен. Скопируйте его вручную.';
+    }
+  });
+  // Stagger-появление блоков
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var groups = new Map();
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        var parent = el.parentElement;
+        var i = groups.get(parent) || 0;
+        el.style.transitionDelay = (i * 45) + 'ms';
+        groups.set(parent, i + 1);
+        el.classList.add('visible');
+        io.unobserve(el);
+      });
+    }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add('visible'); });
+  }
+
+  // Активный пункт навигации
+  function headerOffset(){ return document.querySelector('.nav').getBoundingClientRect().bottom + 20; }
+  var links = document.querySelectorAll('.nav-links a');
+  var sections = [];
+  links.forEach(function(a){
+    var href = a.getAttribute('href');
+    if (!href || href.charAt(0) !== '#') return;
+    var s = document.querySelector(href);
+    if (s) sections.push({a:a, s:s});
+  });
+  window.addEventListener('scroll', function(){
+    var y = window.scrollY + headerOffset(), cur = null;
+    sections.forEach(function(o){ if (o.s.offsetTop <= y) cur = o; });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if (cur) cur.a.classList.add('active');
+  }, {passive:true});
+
+  // Переключатель «Уменьшить движение»
+  var sw = document.getElementById('motion-switch');
+  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function apply(on){
+    document.documentElement.classList.toggle('reduce-motion', on);
+    sw.setAttribute('aria-checked', on ? 'true' : 'false');
+  }
+  sw.addEventListener('click', function(){
+    apply(!document.documentElement.classList.contains('reduce-motion'));
+  });
+  if (mq.matches) apply(true);
+  mq.addEventListener && mq.addEventListener('change', function(e){ apply(e.matches); });
+
+  // Плавный скролл с учётом фиксированной шапки
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(ev){
+      var id = a.getAttribute('href');
+      if (id === '#' || id === '#top') return;
+      var t = document.querySelector(id);
+      if (!t) return;
+      ev.preventDefault();
+      window.scrollTo({top: t.offsetTop - headerOffset(), behavior:
+        document.documentElement.classList.contains('reduce-motion') ? 'auto' : 'smooth'});
+    });
+  });
+})();
+</script>
+</body>
+</html>
