@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Z-Aura — нативный интерфейс для zapret</title>
-<meta name="description" content="Z-Aura — Windows-интерфейс для zapret-discord-youtube. Стратегии обхода DPI, профили, редактор списков и fake-файлы без bat-файлов.">
+<meta name="description" content="Z-Aura 0.3.3: WPF-интерфейс для zapret и других движков, Telegram Proxy, восстановление, пресеты, Режим Стримера и Discord RPC. Не VPN.">
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="apple-touch-icon" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -310,6 +310,7 @@ html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{t
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.blob,.status-dot::before,.win-run::after{animation:none}.reveal{opacity:1;transform:none;transition:none}.theme-picker button,.site-preferences a,.nav-links a{transition:none}}
 @media(prefers-reduced-transparency:reduce){.glass,.btn-glass,.chip{background:var(--glass-modal);backdrop-filter:none}}
 @media(forced-colors:active){html{scrollbar-color:auto}body,.glass,.dl,.donate-panel,.win-card{background:Canvas;color:CanvasText;box-shadow:none}.hero h1 .grad{background:none;-webkit-text-fill-color:CanvasText}.btn,.site-preferences a,.theme-picker{border:1px solid ButtonText}.theme-picker button{color:ButtonText;box-shadow:none}.theme-picker button[aria-checked="true"]{border:2px solid Highlight;color:Highlight}}
+.screenshot{padding:14px;margin:0 0 24px;border-radius:24px;overflow:hidden}.screenshot img{display:block;width:100%;height:auto;border-radius:14px}.screenshot figcaption{padding:14px 8px 2px;color:var(--muted);line-height:1.5}.release-evidence{margin-top:28px;color:var(--muted);line-height:1.75;overflow-wrap:anywhere}@media(max-width:600px){.screenshot{padding:7px;border-radius:16px}.screenshot img{border-radius:10px}.hero-status{flex-wrap:wrap}}
 </style>
 </head>
 <body>
@@ -346,7 +347,7 @@ html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{t
         </button>
       </div>
     </div>
-    <a class="btn btn-primary btn-nav" href="https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe" title="Скачать Z-Aura.exe из последнего опубликованного GitHub Release">
+    <a class="btn btn-primary btn-nav" href="https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe" title="Скачать Z-Aura.exe">
       <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
       Скачать
     </a>
@@ -358,18 +359,14 @@ html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{t
   <div class="wrap">
     <span class="eyebrow reveal">
       <svg class="icon" style="width:15px;height:15px" viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m6.08 9.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/></svg>
-      Z-Aura 0.3.2 · тестовый кандидат
+      Z-Aura 0.3.3 · тестовый кандидат
     </span>
     <h1 class="reveal">Полный контроль над <span class="grad">zapret</span> — без единого bat-файла</h1>
-    <p class="lead reveal">
-      Z-Aura — нативный Windows-интерфейс для zapret-discord-youtube 1.10.4.
-      Выбирайте стратегии обхода DPI, управляйте списками доменов и профилими
-      в несколько кликов. Один EXE — и всё уже внутри.
-    </p>
+    <p class="lead reveal">Нативный Windows-интерфейс на .NET 10 / WPF: zapret/winws, ByeDPI, sing-box + ByeDPI и GoodbyeDPI. Все 22 исходные стратегии winws сохранены. Зависимости включены в один EXE.</p>
     <div class="hero-cta reveal">
-      <a class="btn btn-primary" href="https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe" title="Скачать Z-Aura.exe из последнего опубликованного GitHub Release">
+      <a class="btn btn-primary" href="https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe" title="Скачать Z-Aura.exe">
         <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
-        Скачать Z-Aura
+        Скачать
       </a>
       <a class="btn btn-glass" href="#how">Как это работает</a>
       <a class="btn btn-glass" href="https://t.me/zaurafork" target="_blank" rel="noopener noreferrer">Telegram · @zaurafork</a>
@@ -386,28 +383,34 @@ html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{t
         <svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
       </span>
       <div>
-        <div class="st-title">Z-Aura 0.3.2 · Comfort</div>
-        <div class="st-sub">Кликабельный оверлей · сохранённый вход Discord · RU / ENG</div>
+        <div class="st-title">Локальная исправленная сборка · 0.3.3</div>
+        <div class="st-sub">Панель управления · Режим Стримера · звук и RPC</div>
       </div>
-      <span class="mini-pill">0.3.2 · candidate</span>
+      <span class="mini-pill">0.3.3 · candidate</span>
     </div>
   </div>
 </section>
 
 <!-- ================= ВОЗМОЖНОСТИ ================= -->
+<section id="update"><div class="wrap"><div class="section-head reveal"><span class="eyebrow">0.3.3</span><h2 style="margin-top:18px">Что нового в 0.3.3</h2><p>Исправленная локальная ревизия. Ссылки GitHub ведут к опубликованным релизам и не подтверждают публикацию этой сборки.</p></div><div class="grid"><article class="card glass reveal"><h3>Панель управления</h3><p>Выбор движка, проверка конфликтов и настройка TCP-маршрутизации для выбранных EXE через sing-box + собственный локальный ByeDPI. VPN и антивирус автоматически не отключаются.</p></article>
+<article class="card glass reveal"><h3>Восстановление и пресеты</h3><p>Снимки перед собственными изменениями hosts, DNS и службы; проверка последующих изменений перед ограниченным откатом. Сетевые пресеты сохраняют выбранный режим. Это не образ Windows.</p></article>
+<article class="card glass reveal"><h3>Режим Стримера</h3><p>Постоянная подпись и переключатель состояния. Скрываются личность Discord, пути, журналы и персональные сведения RPC. Режим не обеспечивает сетевую анонимность.</p></article>
+<article class="card glass reveal"><h3>Звуки и видимый RPC</h3><p>В Опциях: включение звука, громкость и прослушивание. Скорость адаптеров и локальные достижения включаются отдельно; активность видна в предпросмотре. Telegram-кнопка сохранена.</p></article>
+<article class="card glass reveal"><h3>Подбор стратегии</h3><p>Отменяемое сравнение пяти стратегий по HTTPS-проверкам, с контрольным измерением без движка. Результат не гарантирует работу видео, звонков или доступность у провайдера.</p></article>
+<article class="card glass reveal"><h3>Доработанный интерфейс</h3><p>Исходный PNG-логотип, выровненная боковая панель, прокрутка Опций и компактный прогресс удержания. Полная диагностика конфликтов вынесена из повторного запуска профиля.</p></article></div><p class="release-evidence">Проверено локально: 2051 backend-проверка, 358 GUI PASS-записей и 80/80 Node-тестов. Реальный TUN/WinDivert, слышимость на устройстве и показ активности живым клиентом Discord не объявляются проверенными.</p></div></section>
 <section id="features">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Возможности</span>
       <h2 style="margin-top:18px">Всё, что раньше был сценарий — теперь клик</h2>
-      <p>Пакетный движок upstream остался нетронутым. Новое в тестовом кандидате: независимый Telegram Proxy и Presence с Alt + Zapret + Proxy. Анонсы — в нашем Telegram-канале.</p>
+      <p>Панель управления объединяет движки, восстановление, пресеты, диагностику и опции. Выбор процессов поддерживается только в sing-box + ByeDPI для TCP; UDP, QUIC и голос остаются прямыми.</p>
     </div>
     <div class="grid">
       <div class="card glass reveal">
         <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3v13m-5-5 5 5 5-5M4 16v5h16v-5"/></svg></span>
         <h3>Обновления самого Z-Aura</h3>
         <p>Проверка стабильной версии на GitHub, добровольная автозагрузка и проверка SHA-256. Установка — после подтверждения перезапуска, с резервным EXE. Runtime Flowseal не обновляется.</p>
-        <span class="tag">0.3.2 · тестовый кандидат</span>
+        <span class="tag">0.3.3 · тестовый кандидат</span>
       </div>
       <div class="card glass reveal">
         <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="m3 11 18-8-4 18-6-6-4 3 1-5Z"/></svg></span>
@@ -417,8 +420,8 @@ html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{t
       </div>
       <div class="card glass reveal">
         <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg></span>
-        <h3>Обновлённая Presence</h3>
-        <p>Alt, Zapret On/Off и Proxy On/Off в Discord, таймер на время работы приложения и автоматическое переподключение. Кнопка Telegram-канала рядом с необязательной «Мой Alt».</p>
+        <h3>Discord RPC</h3>
+        <p>В Опциях: включение звука, громкость и прослушивание. Скорость адаптеров и локальные достижения включаются отдельно; активность видна в предпросмотре. Telegram-кнопка сохранена.</p>
       </div>
       <div class="card glass reveal">
         <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="M4 21v-7"/><path d="M4 10V3"/><path d="M12 21v-9"/><path d="M12 8V3"/><path d="M20 21v-5"/><path d="M20 12V3"/><path d="M1 14h6"/><path d="M9 8h6"/><path d="M17 16h6"/></svg></span>
@@ -443,8 +446,8 @@ html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{t
       </div>
       <div class="card glass reveal">
         <span class="ico"><svg class="icon" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4"/><path d="M14 12h.01"/><path d="M17.5 12h.01"/></svg></span>
-        <h3>Фильтрация игрового трафика</h3>
-        <p>Отдельные правила для игровых приложений — чтобы профиль не задевал то, что не должен.</p>
+        <h3>Фильтры игрового трафика</h3>
+        <p>В профилях winws можно задавать фильтры трафика. Выбор EXE — отдельная возможность sing-box + ByeDPI для TCP; UDP/QUIC и голос остаются прямыми.</p>
       </div>
       <div class="card glass reveal">
         <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="m4 17 6-6-6-6"/><path d="M12 19h8"/></svg></span>
@@ -471,8 +474,8 @@ html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{t
       </div>
       <div class="step glass reveal">
         <div class="num">02</div>
-        <h3>Выберите профиль</h3>
-        <p>При старте WPF восстанавливает ресурсы по SHA-256 и проверяет подпись драйвера. Windows-защита автоматически не отключается.</p>
+        <h3>Выберите движок и профиль</h3>
+        <p>22 исходные стратегии относятся к winws. Они не переносятся автоматически в ByeDPI или GoodbyeDPI; для выбора EXE используйте sing-box + ByeDPI (только TCP).</p>
       </div>
       <div class="step glass reveal">
         <div class="num">03</div>
@@ -488,81 +491,18 @@ html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{t
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Интерфейс</span>
-      <h2 style="margin-top:18px">Стекло, а не окно Windows</h2>
-      <p>Ни одного нативного контрола, ни одной системной иконки. Всё отрисовано кастомно — от скроллбаров до переключателей.</p>
+      <h2 style="margin-top:18px">Реальный интерфейс 0.3.3</h2>
+      <p>Скриншоты из изолированных GUI-проверок. Значения в RPC относятся к тестовым данным.</p>
     </div>
 
-    <div class="app-window glass reveal" role="img" aria-label="Мокап интерфейса приложения Z-Aura">
-      <div class="win-titlebar">
-        <span class="win-btn win-btn-1"></span>
-        <span class="win-btn win-btn-2"></span>
-        <span class="win-btn win-btn-3"></span>
-        <span class="win-title">Z-Aura</span>
-      </div>
-      <div class="win-body">
-        <aside class="win-side" aria-hidden="true">
-          <span class="win-nav active">
-            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>
-            Обзор
-          </span>
-          <span class="win-nav">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M4 21v-7"/><path d="M4 10V3"/><path d="M12 21v-9"/><path d="M12 8V3"/><path d="M20 21v-5"/><path d="M20 12V3"/><path d="M1 14h6"/><path d="M9 8h6"/><path d="M17 16h6"/></svg>
-            Стратегии
-          </span>
-          <span class="win-nav">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg>
-            Списки
-          </span>
-          <span class="win-nav">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 12.34-9.17 4.16a2 2 0 0 1-1.66 0L2 12.34"/></svg>
-            Fake-файлы
-          </span>
-          <span class="win-nav">
-            <svg class="icon" viewBox="0 0 24 24"><path d="m4 17 6-6-6-6"/><path d="M12 19h8"/></svg>
-            Журнал
-          </span>
-          <span class="win-nav">
-            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
-            Настройки
-          </span>
-        </aside>
-        <div class="win-main">
-          <div class="win-card">
-            <div class="row">
-              <div>
-                <div class="lab">Состояние</div>
-                <div class="val">Движок активен</div>
-              </div>
-              <span class="mini-pill">Профиль: Discord + YouTube</span>
-            </div>
-          </div>
-          <div class="win-card">
-            <div class="row">
-              <div>
-                <div class="lab">Стратегия</div>
-                <div class="val">Custom strategy · 4 блока</div>
-              </div>
-              <svg class="icon" style="color:var(--accent)" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
-            </div>
-          </div>
-          <button class="win-run" type="button" tabindex="-1">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M8 5.14v13.72L19 12 8 5.14Z"/></svg>
-            Остановить
-          </button>
-          <div class="win-card win-log" aria-hidden="true">
-            <b>[ok]</b> профиль «Discord + YouTube» загружен<br>
-            <b>[ok]</b> подпись WinDivert проверена<br>
-            <b>[run]</b> winws · 3 фильтра · fake TLS hello
-          </div>
-        </div>
-      </div>
-    </div>
-
+<figure class="glass reveal screenshot"><img src="assets/screenshots/overview-ru.png" alt="Обзор · тёмная тема" loading="lazy" width="1320" height="890"><figcaption>Обзор · тёмная тема</figcaption></figure>
+<figure class="glass reveal screenshot"><img src="assets/screenshots/options-ru.png" alt="Опции · звуки и предпросмотр RPC" loading="lazy" width="980" height="800"><figcaption>Опции · звуки и предпросмотр RPC</figcaption></figure>
+<figure class="glass reveal screenshot"><img src="assets/screenshots/streamer-ru.png" alt="Режим Стримера · минимальная ширина" loading="lazy" width="1040" height="700"><figcaption>Режим Стримера · минимальная ширина</figcaption></figure>
     <div class="ui-features">
       <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="19" cy="13" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="10" cy="19" r="2.5"/></svg>Светлая и тёмная тема</span>
       <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="M3 10h18"/></svg>Ctrl+K — быстрые действия</span>
       <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/><path d="M14 9h.01"/><path d="M10 9h.01"/></svg>Toast-уведомления с Undo</span>
-      <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a7 7 0 1 0 10 10"/><path d="M12 8v4l3 3"/></svg>Пружинные анимации</span>
+      <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a7 7 0 1 0 10 10"/><path d="M12 8v4l3 3"/></svg>Плавные анимации</span>
       <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="3"/><path d="M16 3l-4 4-4-4"/></svg>Высокий контраст</span>
       <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><path d="M5 8V4h14v4"/><path d="M2 8h20"/><path d="M12 8v12"/><path d="M8 20h8"/></svg>Reduced Motion / Transparency</span>
     </div>
@@ -582,7 +522,7 @@ html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{t
         <span class="ico"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg></span>
         <div>
           <h3>Без обязательного аккаунта</h3>
-          <p>Все возможности доступны без входа. Discord OAuth запрашивает только identify. Сеанс сохраняется с защитой Windows DPAPI для текущего пользователя; выход удаляет его. Данные аккаунта не передаются в Presence.</p>
+          <p>Основные сетевые функции доступны без входа. Discord OAuth запрашивает identify; сеанс защищён Windows DPAPI для текущего пользователя. После добровольного входа RPC может показывать кнопку профиля; Режим Стримера скрывает персональные сведения.</p>
         </div>
       </div>
       <div class="card glass reveal">
@@ -607,20 +547,17 @@ html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{t
 <section id="download">
   <div class="wrap">
     <div class="dl reveal">
-      <h2>Один файл. И он уже готов.</h2>
-      <p class="lead">
-        Портативная сборка Z-Aura: встроенный движок zapret 1.10.4, драйвер, списки
-        и шрифты. Скопируйте EXE в любую папку и запустите — установщика нет.
-      </p>
+      <h2>Один EXE. Зависимости внутри.</h2>
+      <p class="lead">Windows 10/11 x64, права администратора. Кнопка скачивает Z-Aura.exe из последнего опубликованного GitHub Release. Его версия может отличаться от описанной локальной ревизии 0.3.3. Сохраняйте старые EXE и данные перед обновлением.</p>
       <div class="dl-cta">
-        <a class="btn btn-primary" href="https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe" id="dl-link" title="Скачать Z-Aura.exe из последнего опубликованного GitHub Release">
+        <a class="btn btn-primary" href="https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe" id="dl-link" title="Скачать Z-Aura.exe">
           <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
-          Скачать Z-Aura.exe
+          Скачать
         </a>
         <a class="btn btn-glass" href="https://github.com/dopebeanie/Z-Aura#readme" id="docs-link">Документация</a>
         <a class="btn btn-glass" href="https://t.me/zaurafork" target="_blank" rel="noopener noreferrer">Новости в Telegram</a>
       </div>
-      <div class="dl-meta">
+      <p class="release-evidence">Исправленная локальная ревизия. Ссылки GitHub ведут к опубликованным релизам и не подтверждают публикацию этой сборки.</p><div class="dl-meta">
         <span><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="m9 12 2 2 4-4"/></svg>Windows 10/11 · x64</span>
         <span><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="m9 12 2 2 4-4"/></svg>Без установки зависимостей</span>
         <span><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="m9 12 2 2 4-4"/></svg>SHA-256 в описании релиза</span>

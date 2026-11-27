@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Z-Aura — a native interface for zapret</title>
-<meta name="description" content="Z-Aura — a Windows interface for zapret-discord-youtube. DPI strategies, profiles, list editing and fake files without batch scripts.">
+<meta name="description" content="Z-Aura 0.3.3: a WPF interface for zapret and other engines, Telegram Proxy, recovery, presets, Streamer Mode and Discord RPC. Not a VPN.">
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="apple-touch-icon" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -310,6 +310,7 @@ html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{t
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.blob,.status-dot::before,.win-run::after{animation:none}.reveal{opacity:1;transform:none;transition:none}.theme-picker button,.site-preferences a,.nav-links a{transition:none}}
 @media(prefers-reduced-transparency:reduce){.glass,.btn-glass,.chip{background:var(--glass-modal);backdrop-filter:none}}
 @media(forced-colors:active){html{scrollbar-color:auto}body,.glass,.dl,.donate-panel,.win-card{background:Canvas;color:CanvasText;box-shadow:none}.hero h1 .grad{background:none;-webkit-text-fill-color:CanvasText}.btn,.site-preferences a,.theme-picker{border:1px solid ButtonText}.theme-picker button{color:ButtonText;box-shadow:none}.theme-picker button[aria-checked="true"]{border:2px solid Highlight;color:Highlight}}
+.screenshot{padding:14px;margin:0 0 24px;border-radius:24px;overflow:hidden}.screenshot img{display:block;width:100%;height:auto;border-radius:14px}.screenshot figcaption{padding:14px 8px 2px;color:var(--muted);line-height:1.5}.release-evidence{margin-top:28px;color:var(--muted);line-height:1.75;overflow-wrap:anywhere}@media(max-width:600px){.screenshot{padding:7px;border-radius:16px}.screenshot img{border-radius:10px}.hero-status{flex-wrap:wrap}}
 </style>
 </head>
 <body>
@@ -346,7 +347,7 @@ html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{t
         </button>
       </div>
     </div>
-    <a class="btn btn-primary btn-nav" href="https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe" title="Download Z-Aura.exe from the latest published GitHub release">
+    <a class="btn btn-primary btn-nav" href="https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe" title="Download Z-Aura.exe">
       <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
       Download
     </a>
@@ -358,16 +359,14 @@ html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{t
   <div class="wrap">
     <span class="eyebrow reveal">
       <svg class="icon" style="width:15px;height:15px" viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m6.08 9.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/></svg>
-      Z-Aura 0.3.2 · test candidate
+      Z-Aura 0.3.3 · test candidate
     </span>
     <h1 class="reveal">Full control over <span class="grad">zapret</span> — without a single batch script</h1>
-    <p class="lead reveal">
-      Z-Aura is a native Windows interface for zapret-discord-youtube 1.10.4. Choose DPI strategies and manage domain lists and profiles in a few clicks. One EXE, with everything bundled.
-    </p>
+    <p class="lead reveal">A native .NET 10 / WPF Windows interface for zapret/winws, ByeDPI, sing-box + ByeDPI and GoodbyeDPI. All 22 original winws strategies remain. Dependencies are bundled in one EXE.</p>
     <div class="hero-cta reveal">
-      <a class="btn btn-primary" href="https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe" title="Download Z-Aura.exe from the latest published GitHub release">
+      <a class="btn btn-primary" href="https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe" title="Download Z-Aura.exe">
         <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
-        Download Z-Aura
+        Download
       </a>
       <a class="btn btn-glass" href="#how">How it works</a>
       <a class="btn btn-glass" href="https://t.me/zaurafork" target="_blank" rel="noopener noreferrer">Telegram · @zaurafork</a>
@@ -384,28 +383,34 @@ html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{t
         <svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
       </span>
       <div>
-        <div class="st-title">Z-Aura 0.3.2 · Comfort</div>
-        <div class="st-sub">Clickable overlay · remembered Discord sign-in · RU / ENG</div>
+        <div class="st-title">Local corrected build · 0.3.3</div>
+        <div class="st-sub">Control Panel · Streamer Mode · sounds and RPC</div>
       </div>
-      <span class="mini-pill">0.3.2 · candidate</span>
+      <span class="mini-pill">0.3.3 · candidate</span>
     </div>
   </div>
 </section>
 
 <!-- ================= ВОЗМОЖНОСТИ ================= -->
+<section id="update"><div class="wrap"><div class="section-head reveal"><span class="eyebrow">0.3.3</span><h2 style="margin-top:18px">New in 0.3.3</h2><p>A corrected local revision. GitHub links point to published releases and do not imply that this build has been published.</p></div><div class="grid"><article class="card glass reveal"><h3>Control Panel</h3><p>Choose an engine, inspect conflicts and route selected EXEs over TCP with sing-box and an owned local ByeDPI bridge. VPN and antivirus software are never automatically disabled.</p></article>
+<article class="card glass reveal"><h3>Recovery and presets</h3><p>Snapshots precede owned hosts, DNS and service changes. Scoped rollback checks subsequent changes first. Network presets retain your selected mode. This is not a Windows system image.</p></article>
+<article class="card glass reveal"><h3>Streamer Mode</h3><p>A stable label and state switch hide Discord identity, paths, logs and personalized RPC information. The mode does not provide network anonymity.</p></article>
+<article class="card glass reveal"><h3>Sounds and visible RPC</h3><p>Options includes a sound toggle, volume and preview. Adapter rates and local achievements are opt-in, with a visible activity preview. The Telegram button stays.</p></article>
+<article class="card glass reveal"><h3>Strategy Finder</h3><p>A cancellable comparison of five strategies using HTTPS checks and an engine-off baseline. Results do not guarantee video, calls or connectivity on your ISP.</p></article>
+<article class="card glass reveal"><h3>Interface refinements</h3><p>Original PNG branding, aligned sidebar actions, working Options scrolling and compact hold progress. Repeated profile startup no longer runs a full conflict inspection.</p></article></div><p class="release-evidence">Verified locally: 2051 backend assertions, 358 GUI PASS records and 80/80 Node tests. Real TUN/WinDivert operations, sound-device output and display in a live Discord client are not claimed as verified.</p></div></section>
 <section id="features">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Features</span>
       <h2 style="margin-top:18px">What used to take a script now takes a click</h2>
-      <p>The upstream packet engine remains unchanged. The candidate includes independent Telegram Proxy and Presence with Alt + Zapret + Proxy. Follow announcements in our Telegram channel.</p>
+      <p>Control Panel brings together engines, recovery, presets, diagnostics and options. Process selection is supported only by sing-box + ByeDPI for TCP; UDP, QUIC and voice remain direct.</p>
     </div>
     <div class="grid">
       <div class="card glass reveal">
         <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3v13m-5-5 5 5 5-5M4 16v5h16v-5"/></svg></span>
         <h3>Updates for Z-Aura itself</h3>
         <p>Stable GitHub version checks, optional automatic downloads and SHA-256 verification. Installation requires restart confirmation and retains a backup EXE. The Flowseal runtime is not updated.</p>
-        <span class="tag">0.3.2 · test candidate</span>
+        <span class="tag">0.3.3 · test candidate</span>
       </div>
       <div class="card glass reveal">
         <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="m3 11 18-8-4 18-6-6-4 3 1-5Z"/></svg></span>
@@ -415,8 +420,8 @@ html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{t
       </div>
       <div class="card glass reveal">
         <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg></span>
-        <h3>Refined Presence</h3>
-        <p>Alt, Zapret On/Off and Proxy On/Off in Discord, application uptime and automatic reconnection. A Telegram channel button accompanies the optional My Alt button.</p>
+        <h3>Discord RPC</h3>
+        <p>Options includes a sound toggle, volume and preview. Adapter rates and local achievements are opt-in, with a visible activity preview. The Telegram button stays.</p>
       </div>
       <div class="card glass reveal">
         <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="M4 21v-7"/><path d="M4 10V3"/><path d="M12 21v-9"/><path d="M12 8V3"/><path d="M20 21v-5"/><path d="M20 12V3"/><path d="M1 14h6"/><path d="M9 8h6"/><path d="M17 16h6"/></svg></span>
@@ -441,8 +446,8 @@ html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{t
       </div>
       <div class="card glass reveal">
         <span class="ico"><svg class="icon" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4"/><path d="M14 12h.01"/><path d="M17.5 12h.01"/></svg></span>
-        <h3>Game traffic filtering</h3>
-        <p>Separate rules for game applications to keep profiles scoped to the intended traffic.</p>
+        <h3>Game traffic filters</h3>
+        <p>Winws profiles support traffic filters. EXE selection is a separate sing-box + ByeDPI feature for TCP; UDP/QUIC and voice remain direct.</p>
       </div>
       <div class="card glass reveal">
         <span class="ico"><svg class="icon" viewBox="0 0 24 24"><path d="m4 17 6-6-6-6"/><path d="M12 19h8"/></svg></span>
@@ -469,8 +474,8 @@ html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{t
       </div>
       <div class="step glass reveal">
         <div class="num">02</div>
-        <h3>Choose a profile</h3>
-        <p>At startup, WPF verifies/restores resources using SHA-256 and checks the driver signature. Windows security is not automatically disabled.</p>
+        <h3>Choose an engine and profile</h3>
+        <p>The 22 original strategies apply to winws. They are not automatically translated to ByeDPI or GoodbyeDPI. Use sing-box + ByeDPI for EXE selection (TCP only).</p>
       </div>
       <div class="step glass reveal">
         <div class="num">03</div>
@@ -486,81 +491,18 @@ html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{t
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Interface</span>
-      <h2 style="margin-top:18px">Glass, not a standard Windows frame</h2>
-      <p>Custom-drawn controls and icons, from scrollbars to switches, create a consistent interface.</p>
+      <h2 style="margin-top:18px">The actual 0.3.3 interface</h2>
+      <p>Screenshots from isolated GUI checks. RPC values shown here are test fixture data.</p>
     </div>
 
-    <div class="app-window glass reveal" role="img" aria-label="Z-Aura interface mockup">
-      <div class="win-titlebar">
-        <span class="win-btn win-btn-1"></span>
-        <span class="win-btn win-btn-2"></span>
-        <span class="win-btn win-btn-3"></span>
-        <span class="win-title">Z-Aura</span>
-      </div>
-      <div class="win-body">
-        <aside class="win-side" aria-hidden="true">
-          <span class="win-nav active">
-            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>
-            Overview
-          </span>
-          <span class="win-nav">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M4 21v-7"/><path d="M4 10V3"/><path d="M12 21v-9"/><path d="M12 8V3"/><path d="M20 21v-5"/><path d="M20 12V3"/><path d="M1 14h6"/><path d="M9 8h6"/><path d="M17 16h6"/></svg>
-            Strategies
-          </span>
-          <span class="win-nav">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg>
-            Lists
-          </span>
-          <span class="win-nav">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 12.34-9.17 4.16a2 2 0 0 1-1.66 0L2 12.34"/></svg>
-            Fake files
-          </span>
-          <span class="win-nav">
-            <svg class="icon" viewBox="0 0 24 24"><path d="m4 17 6-6-6-6"/><path d="M12 19h8"/></svg>
-            Logs
-          </span>
-          <span class="win-nav">
-            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
-            Settings
-          </span>
-        </aside>
-        <div class="win-main">
-          <div class="win-card">
-            <div class="row">
-              <div>
-                <div class="lab">Status</div>
-                <div class="val">Engine active</div>
-              </div>
-              <span class="mini-pill">Profile: Discord + YouTube</span>
-            </div>
-          </div>
-          <div class="win-card">
-            <div class="row">
-              <div>
-                <div class="lab">Strategy</div>
-                <div class="val">Custom strategy · 4 blocks</div>
-              </div>
-              <svg class="icon" style="color:var(--accent)" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
-            </div>
-          </div>
-          <button class="win-run" type="button" tabindex="-1">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M8 5.14v13.72L19 12 8 5.14Z"/></svg>
-            Stop
-          </button>
-          <div class="win-card win-log" aria-hidden="true">
-            <b>[ok]</b> Discord + YouTube profile loaded<br>
-            <b>[ok]</b> WinDivert signature verified<br>
-            <b>[run]</b> winws · 3 filters · fake TLS hello
-          </div>
-        </div>
-      </div>
-    </div>
-
+<figure class="glass reveal screenshot"><img src="assets/screenshots/overview-en.png" alt="Overview · dark theme" loading="lazy" width="1320" height="890"><figcaption>Overview · dark theme</figcaption></figure>
+<figure class="glass reveal screenshot"><img src="assets/screenshots/options-en.png" alt="Options · sounds and RPC preview" loading="lazy" width="980" height="800"><figcaption>Options · sounds and RPC preview</figcaption></figure>
+<figure class="glass reveal screenshot"><img src="assets/screenshots/streamer-en.png" alt="Streamer Mode · minimum width" loading="lazy" width="1040" height="700"><figcaption>Streamer Mode · minimum width</figcaption></figure>
     <div class="ui-features">
       <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="19" cy="13" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="10" cy="19" r="2.5"/></svg>Light and dark themes</span>
       <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="M3 10h18"/></svg>Ctrl+K — quick actions</span>
       <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/><path d="M14 9h.01"/><path d="M10 9h.01"/></svg>Toast notifications with Undo</span>
-      <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a7 7 0 1 0 10 10"/><path d="M12 8v4l3 3"/></svg>Spring animations</span>
+      <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a7 7 0 1 0 10 10"/><path d="M12 8v4l3 3"/></svg>Smooth animations</span>
       <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="3"/><path d="M16 3l-4 4-4-4"/></svg>High contrast</span>
       <span class="chip reveal"><svg class="icon" viewBox="0 0 24 24"><path d="M5 8V4h14v4"/><path d="M2 8h20"/><path d="M12 8v12"/><path d="M8 20h8"/></svg>Reduced Motion / Transparency</span>
     </div>
@@ -605,19 +547,17 @@ html.reduce-motion .theme-picker button,html.reduce-motion .site-preferences a{t
 <section id="download">
   <div class="wrap">
     <div class="dl reveal">
-      <h2>One file. Everything bundled.</h2>
-      <p class="lead">
-        Portable Z-Aura bundles the zapret 1.10.4 engine, driver, lists and fonts. Copy the EXE to a folder and run it — no installer.
-      </p>
+      <h2>One EXE. Dependencies included.</h2>
+      <p class="lead">Windows 10/11 x64; administrator privileges required. The button downloads Z-Aura.exe from the latest published GitHub Release. Its version may differ from the local 0.3.3 revision described here. Preserve your previous EXE and data before upgrading.</p>
       <div class="dl-cta">
-        <a class="btn btn-primary" href="https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe" id="dl-link" title="Download Z-Aura.exe from the latest published GitHub release">
+        <a class="btn btn-primary" href="https://github.com/dopebeanie/Z-Aura/releases/latest/download/Z-Aura.exe" id="dl-link" title="Download Z-Aura.exe">
           <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
-          Download Z-Aura.exe
+          Download
         </a>
         <a class="btn btn-glass" href="https://github.com/dopebeanie/Z-Aura#readme" id="docs-link">Documentation</a>
         <a class="btn btn-glass" href="https://t.me/zaurafork" target="_blank" rel="noopener noreferrer">Telegram news</a>
       </div>
-      <div class="dl-meta">
+      <p class="release-evidence">A corrected local revision. GitHub links point to published releases and do not imply that this build has been published.</p><div class="dl-meta">
         <span><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="m9 12 2 2 4-4"/></svg>Windows 10/11 · x64</span>
         <span><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="m9 12 2 2 4-4"/></svg>No dependency installation</span>
         <span><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="m9 12 2 2 4-4"/></svg>SHA-256 in release notes</span>
